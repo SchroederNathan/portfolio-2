@@ -1,0 +1,255 @@
+/* Exposure Font - All Optical Size Variants */
+
+/* Normal style fonts - each optical size gets a unique font-family */
+@font-face {
+  font-family: 'Exposure-100';
+  src: url('/fonts/exposure/ExposureTrial[-100].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure-90';
+  src: url('/fonts/exposure/ExposureTrial[-90].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure-80';
+  src: url('/fonts/exposure/ExposureTrial[-80].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure-70';
+  src: url('/fonts/exposure/ExposureTrial[-70].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure-60';
+  src: url('/fonts/exposure/ExposureTrial[-60].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure-50';
+  src: url('/fonts/exposure/ExposureTrial[-50].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure-40';
+  src: url('/fonts/exposure/ExposureTrial[-40].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure-30';
+  src: url('/fonts/exposure/ExposureTrial[-30].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure-20';
+  src: url('/fonts/exposure/ExposureTrial[-20].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure-10';
+  src: url('/fonts/exposure/ExposureTrial[-10].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure0';
+  src: url('/fonts/exposure/ExposureTrial[0].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure10';
+  src: url('/fonts/exposure/ExposureTrial[+10].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure20';
+  src: url('/fonts/exposure/ExposureTrial[+20].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure30';
+  src: url('/fonts/exposure/ExposureTrial[+30].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure40';
+  src: url('/fonts/exposure/ExposureTrial[+40].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure50';
+  src: url('/fonts/exposure/ExposureTrial[+50].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure60';
+  src: url('/fonts/exposure/ExposureTrial[+60].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure70';
+  src: url('/fonts/exposure/ExposureTrial[+70].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure80';
+  src: url('/fonts/exposure/ExposureTrial[+80].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure90';
+  src: url('/fonts/exposure/ExposureTrial[+90].otf') format('opentype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Exposure100';
+  src: url('/fonts/exposure/ExposureTrial[+100].otf') format('opentype');
+  font-style: normal;
+}
+
+/* Italic style fonts */
+@font-face {
+  font-family: 'Exposure-100';
+  src: url('/fonts/exposure/ExposureItalicTrial[-100].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure-90';
+  src: url('/fonts/exposure/ExposureItalicTrial[-90].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure-80';
+  src: url('/fonts/exposure/ExposureItalicTrial[-80].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure-70';
+  src: url('/fonts/exposure/ExposureItalicTrial[-70].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure-60';
+  src: url('/fonts/exposure/ExposureItalicTrial[-60].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure-50';
+  src: url('/fonts/exposure/ExposureItalicTrial[-50].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure-40';
+  src: url('/fonts/exposure/ExposureItalicTrial[-40].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure-30';
+  src: url('/fonts/exposure/ExposureItalicTrial[-30].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure-20';
+  src: url('/fonts/exposure/ExposureItalicTrial[-20].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure-10';
+  src: url('/fonts/exposure/ExposureItalicTrial[-10].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure0';
+  src: url('/fonts/exposure/ExposureItalicTrial[0].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure10';
+  src: url('/fonts/exposure/ExposureItalicTrial[+10].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure20';
+  src: url('/fonts/exposure/ExposureItalicTrial[+20].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure30';
+  src: url('/fonts/exposure/ExposureItalicTrial[+30].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure40';
+  src: url('/fonts/exposure/ExposureItalicTrial[+40].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure50';
+  src: url('/fonts/exposure/ExposureItalicTrial[+50].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure60';
+  src: url('/fonts/exposure/ExposureItalicTrial[+60].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure70';
+  src: url('/fonts/exposure/ExposureItalicTrial[+70].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure80';
+  src: url('/fonts/exposure/ExposureItalicTrial[+80].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure90';
+  src: url('/fonts/exposure/ExposureItalicTrial[+90].otf') format('opentype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Exposure100';
+  src: url('/fonts/exposure/ExposureItalicTrial[+100].otf') format('opentype');
+  font-style: italic;
+}

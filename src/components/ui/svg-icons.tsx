@@ -1,20 +1,19 @@
-import React from 'react';
+import React from "react";
 
-interface MoonIconProps extends React.SVGProps<SVGSVGElement> {
+interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string;
   color?: string;
   className?: string;
 }
 
-export const MoonIcon: React.FC<MoonIconProps> = ({
+export const MoonIcon: React.FC<IconProps> = ({
   size = 24,
   color,
   className,
   ...props
 }) => {
-  // Use currentColor if no color prop is provided, allowing CSS to control it
-  const fillColor = color ?? 'currentColor';
-  
+  const fillColor = color ?? "currentColor";
+
   return (
     <svg
       width={size}
@@ -45,24 +44,14 @@ export const MoonIcon: React.FC<MoonIconProps> = ({
   );
 };
 
-// Backward compatibility - export as moon function as well
-export const moon = () => <MoonIcon />;
-
-interface XIconProps extends React.SVGProps<SVGSVGElement> {
-  size?: number | string;
-  color?: string;
-  className?: string;
-}
-
-export const XIcon: React.FC<XIconProps> = ({
+export const XIcon: React.FC<IconProps> = ({
   size = 24,
   color,
   className,
   ...props
 }) => {
-  // Use currentColor if no color prop is provided, allowing CSS to control it
-  const fillColor = color ?? 'currentColor';
-  
+  const fillColor = color ?? "currentColor";
+
   return (
     <svg
       width={size}
@@ -83,21 +72,14 @@ export const XIcon: React.FC<XIconProps> = ({
   );
 };
 
-interface InstagramIconProps extends React.SVGProps<SVGSVGElement> {
-  size?: number | string;
-  color?: string;
-  className?: string;
-}
-
-export const InstagramIcon: React.FC<InstagramIconProps> = ({
+export const InstagramIcon: React.FC<IconProps> = ({
   size = 24,
   color,
   className,
   ...props
 }) => {
-  // Use currentColor if no color prop is provided, allowing CSS to control it
-  const fillColor = color ?? 'currentColor';
-  
+  const fillColor = color ?? "currentColor";
+
   return (
     <svg
       width={size}
@@ -118,21 +100,14 @@ export const InstagramIcon: React.FC<InstagramIconProps> = ({
   );
 };
 
-interface LinkedInIconProps extends React.SVGProps<SVGSVGElement> {
-  size?: number | string;
-  color?: string;
-  className?: string;
-}
-
-export const LinkedInIcon: React.FC<LinkedInIconProps> = ({
+export const LinkedInIcon: React.FC<IconProps> = ({
   size = 24,
   color,
   className,
   ...props
 }) => {
-  // Use currentColor if no color prop is provided, allowing CSS to control it
-  const fillColor = color ?? 'currentColor';
-  
+  const fillColor = color ?? "currentColor";
+
   return (
     <svg
       width={size}
@@ -153,21 +128,14 @@ export const LinkedInIcon: React.FC<LinkedInIconProps> = ({
   );
 };
 
-interface GitHubIconProps extends React.SVGProps<SVGSVGElement> {
-  size?: number | string;
-  color?: string;
-  className?: string;
-}
-
-export const GitHubIcon: React.FC<GitHubIconProps> = ({
+export const GitHubIcon: React.FC<IconProps> = ({
   size = 24,
   color,
   className,
   ...props
 }) => {
-  // Use currentColor if no color prop is provided, allowing CSS to control it
-  const fillColor = color ?? 'currentColor';
-  
+  const fillColor = color ?? "currentColor";
+
   return (
     <svg
       width={size}
@@ -182,6 +150,39 @@ export const GitHubIcon: React.FC<GitHubIconProps> = ({
         d="M9.94118 17.8804C9.94118 17.5169 10.0494 17.2011 10.2238 16.9157C10.3434 16.7199 10.2615 16.4422 10.0453 16.3808C8.25526 15.8726 7 15.0555 7 12.3451C7 11.6404 7.22356 10.9779 7.61654 10.4013C7.71414 10.2581 7.76181 10.193 7.77491 10.1215C7.78806 10.0497 7.76638 9.97161 7.72543 9.80167C7.58167 9.20515 7.57017 8.57672 7.73081 7.99051C7.78361 7.79782 7.8968 7.68543 8.10166 7.70713C8.3674 7.73528 8.82753 7.86109 9.50999 8.30139C9.77813 8.47438 9.9122 8.56088 10.0303 8.58023C10.1484 8.59958 10.3062 8.55906 10.622 8.478C11.0537 8.36716 11.4986 8.30765 12 8.30765C12.5014 8.30765 12.9463 8.36715 13.378 8.478C13.6938 8.55905 13.8516 8.59958 13.9697 8.58023C14.0878 8.56088 14.2219 8.47439 14.49 8.3014C15.1725 7.8611 15.6326 7.73528 15.8983 7.70713C16.1032 7.68543 16.2164 7.79782 16.2692 7.99051C16.4298 8.57672 16.4183 9.20514 16.2746 9.80166C16.2336 9.9716 16.2119 10.0497 16.2251 10.1215C16.2382 10.1929 16.2859 10.2581 16.3834 10.4013C16.7764 10.9779 17 11.6404 17 12.3451C17 15.0555 15.7447 15.8726 13.9547 16.3808C13.7385 16.4422 13.6566 16.7199 13.7762 16.9157C13.9506 17.2011 14.0588 17.5169 14.0588 17.8804V22.6514C19.011 21.6909 22.75 17.3313 22.75 12.0984C22.75 6.16133 17.9371 1.34839 12 1.34839C6.06294 1.34839 1.25 6.16133 1.25 12.0984C1.25 17.3313 4.98901 21.6909 9.94118 22.6514V19.8518C9.88484 19.8452 9.81816 19.8354 9.74225 19.821C9.52615 19.7799 9.23571 19.7012 8.89714 19.5511C8.21489 19.2485 7.36263 18.6669 6.53685 17.5663C6.28826 17.2349 6.35533 16.7648 6.68665 16.5162C7.01798 16.2676 7.48809 16.3347 7.73668 16.666C8.4109 17.5647 9.06058 17.9827 9.50527 18.1799C9.6822 18.2583 9.83089 18.3037 9.94118 18.3299V17.8804Z"
         fill={fillColor}
       />
+    </svg>
+  );
+};
+
+export const ArrowUpRightIcon: React.FC<IconProps> = ({
+  size = 24,
+  color,
+  className,
+  ...props
+}) => {
+  const fillColor = color ?? "currentColor";
+
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 9 17"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      {...props}
+    >
+      <g clipPath="url(#clip0_4_107)">
+        <path
+          d="M4.72263 0.000745397C5.35123 -0.00384127 6.02069 0.0118119 6.58396 0.0736652C6.86443 0.104472 7.13783 0.149085 7.37496 0.214938C7.56143 0.266745 7.80276 0.351672 7.99996 0.511819L8.08136 0.585385L8.15489 0.666765C8.31503 0.863925 8.39996 1.10528 8.45176 1.29177C8.51763 1.52888 8.56223 1.8023 8.59303 2.08278C8.65489 2.64605 8.67056 3.3155 8.66596 3.9441C8.66136 4.57663 8.63603 5.1861 8.61196 5.63617C8.59989 5.86157 8.58816 6.0481 8.57936 6.1785C8.57496 6.24363 8.57089 6.29497 8.56829 6.33017C8.56703 6.3477 8.56643 6.36123 8.56569 6.37057C8.56536 6.37503 8.56463 6.3785 8.56443 6.38097V6.3855C8.53563 6.75257 8.21463 7.02683 7.84763 6.99817C7.48056 6.96937 7.20629 6.64837 7.23496 6.28137V6.27877C7.23516 6.27677 7.23596 6.27363 7.23629 6.26963C7.23689 6.26143 7.23769 6.24883 7.23889 6.2325C7.24129 6.1997 7.24443 6.15103 7.24863 6.08863C7.25709 5.96357 7.26889 5.78343 7.28056 5.56523C7.30396 5.12763 7.32823 4.53963 7.33263 3.93437C7.33676 3.36777 7.32096 2.80125 7.27596 2.33278L1.13797 8.47143C0.87762 8.73183 0.455613 8.73183 0.19526 8.47143C-0.0650867 8.2111 -0.0650867 7.7891 0.19526 7.52877L6.33329 1.39007C5.86496 1.34517 5.29869 1.32995 4.73236 1.33408C4.12709 1.3385 3.53909 1.36276 3.10149 1.38617C2.88325 1.39785 2.70313 1.40963 2.57807 1.41807C2.5157 1.42228 2.46703 1.42543 2.43419 1.42783C2.41787 1.42903 2.40531 1.42981 2.39709 1.43044C2.39305 1.43074 2.38993 1.43159 2.38797 1.43174H2.38537C2.01834 1.46045 1.69735 1.18611 1.66857 0.819105C1.63986 0.452072 1.91418 0.131072 2.2812 0.102312H2.28576C2.28823 0.102119 2.29169 0.101345 2.29617 0.101012C2.30547 0.100305 2.31903 0.0996851 2.33654 0.0984051C2.37172 0.0958318 2.4231 0.091732 2.48823 0.0873387C2.61861 0.0785387 2.80514 0.0668453 3.03056 0.0547854C3.48063 0.0307054 4.09009 0.0053654 4.72263 0.000745397Z"
+          fill={fillColor}
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_4_107">
+          <rect width="8.66671" height="16.6667" fill="white" />
+        </clipPath>
+      </defs>
     </svg>
   );
 };
