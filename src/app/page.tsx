@@ -10,6 +10,7 @@ import {
   XIcon,
 } from "@/components/ui/svg-icons";
 import { useRef } from "react";
+import ThemeToggle from "@/components/theme-toggle";
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -30,7 +31,7 @@ export default function Home() {
               className="font-black"
             />
           </h1>
-          <MoonIcon className="text-muted hover:text-foreground transition-colors duration-300" />
+          <ThemeToggle />
         </div>
         <p className="text-lg font-sans text-muted mb-3">
           developer, UI/UX designer

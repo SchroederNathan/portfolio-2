@@ -16,13 +16,11 @@
   --color-primary: var(--primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --muted: #999999;
-    --primary: #F97316;
-  }
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --muted: #999999;
+  --primary: #F97316;
 }
 
 body {

@@ -1,10 +1,11 @@
+import { ThemeProvider } from "@/components/theme-provider";
 import ClickSpark from "@/components/ui/click-spark";
 import ExposureFontLoader from "@/components/ui/exposure-font-loader";
 import LightRays from "@/components/ui/light-rays";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
 import "./exposure-fonts.css";
+import "./globals.css";
 
 const satoshi = localFont({
   src: [
@@ -49,16 +50,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${satoshi.variable} ${exposure.variable}`}>
-        <ExposureFontLoader />
-        <ClickSpark
-          sparkColor="#fff"
-          sparkSize={10}
-          sparkRadius={15}
-          sparkCount={8}
-          duration={400}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
+          <ExposureFontLoader />
+
           <div className="fixed inset-0 pointer-events-none z-0">
             <LightRays
               raysOrigin="top-center"
@@ -72,7 +73,7 @@ export default function RootLayout({
             />
           </div>
           {children}
-        </ClickSpark>
+        </ThemeProvider>
       </body>
     </html>
   );
