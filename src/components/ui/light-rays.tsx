@@ -1,17 +1,18 @@
-'use client';
+"use client";
 
-import { useRef, useEffect, useState } from 'react';
-import { Renderer, Program, Triangle, Mesh } from 'ogl';
+import { Mesh, Program, Renderer, Triangle } from "ogl";
+import { useTheme } from "next-themes";
+import { useEffect, useRef, useState } from "react";
 
 export type RaysOrigin =
-  | 'top-center'
-  | 'top-left'
-  | 'top-right'
-  | 'right'
-  | 'left'
-  | 'bottom-center'
-  | 'bottom-right'
-  | 'bottom-left';
+  | "top-center"
+  | "top-left"
+  | "top-right"
+  | "right"
+  | "left"
+  | "bottom-center"
+  | "bottom-right"
+  | "bottom-left";
 
 interface LightRaysProps {
   raysOrigin?: RaysOrigin;
@@ -29,11 +30,23 @@ interface LightRaysProps {
   className?: string;
 }
 
-const DEFAULT_COLOR = '#ffffff';
+const getMutedColor = (): string => {
+  if (typeof window === "undefined") return "#000000";
+  const muted = getComputedStyle(document.documentElement)
+    .getPropertyValue("--muted")
+    .trim();
+  return muted || "#000000";
+};
 
 const hexToRgb = (hex: string): [number, number, number] => {
   const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return m ? [parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255] : [1, 1, 1];
+  return m
+    ? [
+        parseInt(m[1], 16) / 255,
+        parseInt(m[2], 16) / 255,
+        parseInt(m[3], 16) / 255,
+      ]
+    : [1, 1, 1];
 };
 
 const getAnchorAndDir = (
@@ -43,19 +56,19 @@ const getAnchorAndDir = (
 ): { anchor: [number, number]; dir: [number, number] } => {
   const outside = 0.2;
   switch (origin) {
-    case 'top-left':
+    case "top-left":
       return { anchor: [0, -outside * h], dir: [0, 1] };
-    case 'top-right':
+    case "top-right":
       return { anchor: [w, -outside * h], dir: [0, 1] };
-    case 'left':
+    case "left":
       return { anchor: [-outside * w, 0.5 * h], dir: [1, 0] };
-    case 'right':
+    case "right":
       return { anchor: [(1 + outside) * w, 0.5 * h], dir: [-1, 0] };
-    case 'bottom-left':
+    case "bottom-left":
       return { anchor: [0, (1 + outside) * h], dir: [0, -1] };
-    case 'bottom-center':
+    case "bottom-center":
       return { anchor: [0.5 * w, (1 + outside) * h], dir: [0, -1] };
-    case 'bottom-right':
+    case "bottom-right":
       return { anchor: [w, (1 + outside) * h], dir: [0, -1] };
     default: // "top-center"
       return { anchor: [0.5 * w, -outside * h], dir: [0, 1] };
@@ -84,8 +97,8 @@ interface Uniforms {
 }
 
 const LightRays: React.FC<LightRaysProps> = ({
-  raysOrigin = 'top-center',
-  raysColor = DEFAULT_COLOR,
+  raysOrigin = "top-center",
+  raysColor,
   raysSpeed = 1,
   lightSpread = 1,
   rayLength = 2,
@@ -96,8 +109,9 @@ const LightRays: React.FC<LightRaysProps> = ({
   mouseInfluence = 0.1,
   noiseAmount = 0.0,
   distortion = 0.0,
-  className = ''
+  className = "",
 }) => {
+  const { resolvedTheme } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
   const uniformsRef = useRef<Uniforms | null>(null);
   const rendererRef = useRef<Renderer | null>(null);
@@ -108,12 +122,61 @@ const LightRays: React.FC<LightRaysProps> = ({
   const cleanupFunctionRef = useRef<(() => void) | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const [mutedColor, setMutedColor] = useState<string>("#ffffff");
+  const targetColorRef = useRef<[number, number, number]>([1, 1, 1]);
+  const currentColorRef = useRef<[number, number, number]>([1, 1, 1]);
+
+  // Track a counter to force re-render when DOM theme changes
+  const [, setThemeCheckCounter] = useState(0);
+
+  // Watch for theme changes and update foreground color
+  useEffect(() => {
+    const updateMutedColor = () => {
+      const color = getMutedColor();
+      setMutedColor(color);
+      targetColorRef.current = hexToRgb(color);
+    };
+
+    const checkTheme = () => {
+      // Force re-render when DOM theme class changes
+      // This ensures opacity updates even if resolvedTheme hasn't updated yet
+      setThemeCheckCounter(prev => prev + 1);
+    };
+
+    // Initial update
+    updateMutedColor();
+    checkTheme();
+
+    // Watch for theme class changes on html element
+    const observer = new MutationObserver(() => {
+      updateMutedColor();
+      checkTheme();
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    // Also watch for CSS variable changes via a polling mechanism
+    // (since MutationObserver doesn't catch CSS variable changes)
+    const interval = setInterval(() => {
+      updateMutedColor();
+      checkTheme();
+    }, 100);
+
+    return () => {
+      observer.disconnect();
+      clearInterval(interval);
+    };
+  }, [resolvedTheme]);
+
 
   useEffect(() => {
     if (!containerRef.current) return;
 
     observerRef.current = new IntersectionObserver(
-      entries => {
+      (entries) => {
         const entry = entries[0];
         setIsVisible(entry.isIntersecting);
       },
@@ -141,19 +204,19 @@ const LightRays: React.FC<LightRaysProps> = ({
     const initializeWebGL = async () => {
       if (!containerRef.current) return;
 
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setTimeout(resolve, 10));
 
       if (!containerRef.current) return;
 
       const renderer = new Renderer({
         dpr: Math.min(window.devicePixelRatio, 2),
-        alpha: true
+        alpha: true,
       });
       rendererRef.current = renderer;
 
       const gl = renderer.gl;
-      gl.canvas.style.width = '100%';
-      gl.canvas.style.height = '100%';
+      gl.canvas.style.width = "100%";
+      gl.canvas.style.height = "100%";
 
       while (containerRef.current.firstChild) {
         containerRef.current.removeChild(containerRef.current.firstChild);
@@ -262,6 +325,11 @@ void main() {
   gl_FragColor  = color;
 }`;
 
+      const effectiveColor = raysColor || mutedColor;
+      const initialColor = hexToRgb(effectiveColor);
+      currentColorRef.current = initialColor;
+      targetColorRef.current = initialColor;
+
       const uniforms: Uniforms = {
         iTime: { value: 0 },
         iResolution: { value: [1, 1] },
@@ -269,7 +337,7 @@ void main() {
         rayPos: { value: [0, 0] },
         rayDir: { value: [0, 1] },
 
-        raysColor: { value: hexToRgb(raysColor) },
+        raysColor: { value: initialColor },
         raysSpeed: { value: raysSpeed },
         lightSpread: { value: lightSpread },
         rayLength: { value: rayLength },
@@ -279,7 +347,7 @@ void main() {
         mousePos: { value: [0.5, 0.5] },
         mouseInfluence: { value: mouseInfluence },
         noiseAmount: { value: noiseAmount },
-        distortion: { value: distortion }
+        distortion: { value: distortion },
       };
       uniformsRef.current = uniforms;
 
@@ -287,7 +355,7 @@ void main() {
       const program = new Program(gl, {
         vertex: vert,
         fragment: frag,
-        uniforms
+        uniforms,
       });
       const mesh = new Mesh(gl, { geometry, program });
       meshRef.current = mesh;
@@ -318,25 +386,56 @@ void main() {
 
         uniforms.iTime.value = t * 0.001;
 
+        // Smooth color interpolation (matching CSS transition duration ~150ms)
+        // At 60fps, 150ms ≈ 9 frames, so we use ~0.11 per frame for smooth transition
+        const colorTransitionSpeed = 0.11;
+        const [targetR, targetG, targetB] = targetColorRef.current;
+        const [currentR, currentG, currentB] = currentColorRef.current;
+        
+        // Only interpolate if there's a meaningful difference
+        const diffR = Math.abs(targetR - currentR);
+        const diffG = Math.abs(targetG - currentG);
+        const diffB = Math.abs(targetB - currentB);
+        
+        if (diffR > 0.001 || diffG > 0.001 || diffB > 0.001) {
+          const newR = currentR + (targetR - currentR) * colorTransitionSpeed;
+          const newG = currentG + (targetG - currentG) * colorTransitionSpeed;
+          const newB = currentB + (targetB - currentB) * colorTransitionSpeed;
+          
+          currentColorRef.current = [newR, newG, newB];
+        } else {
+          // Snap to target when close enough to avoid infinite interpolation
+          currentColorRef.current = targetColorRef.current;
+        }
+        
+        uniforms.raysColor.value = currentColorRef.current;
+
         if (followMouse && mouseInfluence > 0.0) {
           const smoothing = 0.92;
 
-          smoothMouseRef.current.x = smoothMouseRef.current.x * smoothing + mouseRef.current.x * (1 - smoothing);
-          smoothMouseRef.current.y = smoothMouseRef.current.y * smoothing + mouseRef.current.y * (1 - smoothing);
+          smoothMouseRef.current.x =
+            smoothMouseRef.current.x * smoothing +
+            mouseRef.current.x * (1 - smoothing);
+          smoothMouseRef.current.y =
+            smoothMouseRef.current.y * smoothing +
+            mouseRef.current.y * (1 - smoothing);
 
-          uniforms.mousePos.value = [smoothMouseRef.current.x, smoothMouseRef.current.y];
+          uniforms.mousePos.value = [
+            smoothMouseRef.current.x,
+            smoothMouseRef.current.y,
+          ];
         }
 
         try {
           renderer.render({ scene: mesh });
           animationIdRef.current = requestAnimationFrame(loop);
         } catch (error) {
-          console.warn('WebGL rendering error:', error);
+          console.warn("WebGL rendering error:", error);
           return;
         }
       };
 
-      window.addEventListener('resize', updatePlacement);
+      window.addEventListener("resize", updatePlacement);
       updatePlacement();
       animationIdRef.current = requestAnimationFrame(loop);
 
@@ -346,12 +445,13 @@ void main() {
           animationIdRef.current = null;
         }
 
-        window.removeEventListener('resize', updatePlacement);
+        window.removeEventListener("resize", updatePlacement);
 
         if (renderer) {
           try {
             const canvas = renderer.gl.canvas;
-            const loseContextExt = renderer.gl.getExtension('WEBGL_lose_context');
+            const loseContextExt =
+              renderer.gl.getExtension("WEBGL_lose_context");
             if (loseContextExt) {
               loseContextExt.loseContext();
             }
@@ -360,7 +460,7 @@ void main() {
               canvas.parentNode.removeChild(canvas);
             }
           } catch (error) {
-            console.warn('Error during WebGL cleanup:', error);
+            console.warn("Error during WebGL cleanup:", error);
           }
         }
 
@@ -382,6 +482,7 @@ void main() {
     isVisible,
     raysOrigin,
     raysColor,
+    mutedColor,
     raysSpeed,
     lightSpread,
     rayLength,
@@ -391,16 +492,20 @@ void main() {
     followMouse,
     mouseInfluence,
     noiseAmount,
-    distortion
+    distortion,
   ]);
 
   useEffect(() => {
-    if (!uniformsRef.current || !containerRef.current || !rendererRef.current) return;
+    if (!uniformsRef.current || !containerRef.current || !rendererRef.current)
+      return;
 
     const u = uniformsRef.current;
     const renderer = rendererRef.current;
 
-    u.raysColor.value = hexToRgb(raysColor);
+    // Use raysColor if provided, otherwise use foregroundColor
+    const effectiveColor = raysColor || mutedColor;
+    targetColorRef.current = hexToRgb(effectiveColor);
+
     u.raysSpeed.value = raysSpeed;
     u.lightSpread.value = lightSpread;
     u.rayLength.value = rayLength;
@@ -418,6 +523,7 @@ void main() {
     u.rayDir.value = dir;
   }, [
     raysColor,
+    mutedColor,
     raysSpeed,
     lightSpread,
     raysOrigin,
@@ -427,7 +533,7 @@ void main() {
     saturation,
     mouseInfluence,
     noiseAmount,
-    distortion
+    distortion,
   ]);
 
   useEffect(() => {
@@ -440,15 +546,26 @@ void main() {
     };
 
     if (followMouse) {
-      window.addEventListener('mousemove', handleMouseMove);
-      return () => window.removeEventListener('mousemove', handleMouseMove);
+      window.addEventListener("mousemove", handleMouseMove);
+      return () => window.removeEventListener("mousemove", handleMouseMove);
     }
   }, [followMouse]);
+
+  // Compute opacity directly - React will re-render when resolvedTheme changes
+  // Use resolvedTheme as primary source, DOM check as fallback
+  const opacity = resolvedTheme === "light" 
+    ? 0.5 
+    : resolvedTheme === "dark" 
+    ? 1.0 
+    : typeof window !== "undefined" && document.documentElement.classList.contains("dark")
+    ? 1.0
+    : 0.5; // Default to light mode opacity if theme not determined
 
   return (
     <div
       ref={containerRef}
       className={`w-full h-full pointer-events-none z-[3] overflow-hidden relative ${className}`.trim()}
+      style={{ opacity, transition: "opacity 150ms ease-out" }}
     />
   );
 };
