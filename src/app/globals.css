@@ -28,3 +28,29 @@ body {
   color: var(--foreground);
   font-family: var(--font-satoshi), sans-serif;
 }
+
+/* Smooth theme transition */
+html {
+  transition: background-color 150ms ease-out;
+}
+
+body {
+  transition: background-color 150ms ease-out, color 150ms ease-out;
+}
+
+/* Transition colors on text/content elements only - exclude container divs to avoid flickering */
+p, h1, h2, h3, h4, h5, h6, span, a, button, li, label {
+  transition: color 150ms ease-out;
+}
+
+/* Don't transition divs that have motion animations (opacity/transform/filter) */
+div[style*="opacity"],
+div[style*="transform"],
+div[style*="filter"] {
+  transition: none;
+}
+
+/* SVG elements */
+svg {
+  transition: fill 150ms ease-out, stroke 150ms ease-out;
+}
