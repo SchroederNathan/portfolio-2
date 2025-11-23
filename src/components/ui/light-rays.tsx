@@ -125,6 +125,7 @@ const LightRays: React.FC<LightRaysProps> = ({
   const [mutedColor, setMutedColor] = useState<string>("#ffffff");
   const targetColorRef = useRef<[number, number, number]>([1, 1, 1]);
   const currentColorRef = useRef<[number, number, number]>([1, 1, 1]);
+  const [opacity, setOpacity] = useState<number>(0.5); // Default to light mode opacity
 
   // Track a counter to force re-render when DOM theme changes
   const [, setThemeCheckCounter] = useState(0);
@@ -137,14 +138,31 @@ const LightRays: React.FC<LightRaysProps> = ({
       targetColorRef.current = hexToRgb(color);
     };
 
+    const updateOpacity = () => {
+      // Only update opacity on client side to avoid hydration mismatch
+      if (typeof window === "undefined") return;
+      
+      const computedOpacity = resolvedTheme === "light" 
+        ? 0.5 
+        : resolvedTheme === "dark" 
+        ? 1.0 
+        : document.documentElement.classList.contains("dark")
+        ? 1.0
+        : 0.5;
+      
+      setOpacity(computedOpacity);
+    };
+
     const checkTheme = () => {
       // Force re-render when DOM theme class changes
       // This ensures opacity updates even if resolvedTheme hasn't updated yet
       setThemeCheckCounter(prev => prev + 1);
+      updateOpacity();
     };
 
     // Initial update
     updateMutedColor();
+    updateOpacity();
     checkTheme();
 
     // Watch for theme class changes on html element
@@ -550,16 +568,6 @@ void main() {
       return () => window.removeEventListener("mousemove", handleMouseMove);
     }
   }, [followMouse]);
-
-  // Compute opacity directly - React will re-render when resolvedTheme changes
-  // Use resolvedTheme as primary source, DOM check as fallback
-  const opacity = resolvedTheme === "light" 
-    ? 0.5 
-    : resolvedTheme === "dark" 
-    ? 1.0 
-    : typeof window !== "undefined" && document.documentElement.classList.contains("dark")
-    ? 1.0
-    : 0.5; // Default to light mode opacity if theme not determined
 
   return (
     <div
