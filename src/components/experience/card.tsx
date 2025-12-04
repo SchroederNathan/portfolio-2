@@ -56,7 +56,7 @@ const ExperienceCard = ({ experience }: { experience: Experience }) => {
           {experience.role}
           <span className="text-foreground ms-2">·</span>
           <span className="text-foreground ms-2"> {experience.company}</span>
-          <motion.div
+          <motion.span
             className="-mb-4 ms-2 text-muted group-hover/work:text-foreground group-hover/education:text-foreground transition-colors duration-200"
             animate={{ 
               x: isHovered ? 4 : 0, 
@@ -65,7 +65,7 @@ const ExperienceCard = ({ experience }: { experience: Experience }) => {
             transition={{ duration: 0.2, ease: "easeOut" }}
           >
             <ArrowUpRightIcon size={14} />
-          </motion.div>
+          </motion.span>
         </p>
 
         {/* Description */}
