@@ -1,4 +1,7 @@
+"use client";
+
 import ExperienceCard, { Experience } from "@/components/experience/card";
+import { useState } from "react";
 
 const experiences: Experience[] = [
   {
@@ -23,15 +26,23 @@ const experiences: Experience[] = [
 ];
 
 const ExperienceContainer = () => {
+  const [hoveredKey, setHoveredKey] = useState<string | null>(null);
+
   return (
     <section
       id="EXPERIENCE"
       className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
     >
       <p className="text-foreground mb-8 font-bold text-xl">Experience</p>
-      <ol className="group/list">
+      <ol>
         {experiences.map((experience) => (
-          <ExperienceCard key={experience.company} experience={experience} />
+          <ExperienceCard 
+            key={experience.company} 
+            experience={experience}
+            isHovered={hoveredKey === experience.company}
+            isAnyHovered={hoveredKey !== null}
+            onHoverChange={(hovered) => setHoveredKey(hovered ? experience.company : null)}
+          />
         ))}
       </ol>
     </section>

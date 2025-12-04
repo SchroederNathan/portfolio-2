@@ -25,7 +25,7 @@ const ThemeToggle = () => {
   return (
     <motion.button
       whileTap={{ scale: 0.9 }}
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: 1.05, cursor: "pointer" }}
       transition={{ duration: 0.2, ease: "easeInOut" }}
       className="group relative p-2 w-10 h-10 flex items-center justify-center"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}

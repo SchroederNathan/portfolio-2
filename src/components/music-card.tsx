@@ -378,7 +378,7 @@ const MusicCard = ({ trackId, search }: MusicCardProps) => {
           <div className="flex flex-row items-center gap-3">
             <motion.button
               whileTap={{ scale: 0.9 }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, cursor: "pointer" }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
               onClick={togglePlayback}
               className="bg-foreground rounded-full p-2 w-8 h-8 flex items-center justify-center shrink-0 transition-colors duration-200"
