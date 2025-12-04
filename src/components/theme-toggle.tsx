@@ -25,6 +25,7 @@ const ThemeToggle = () => {
   return (
     <motion.button
       whileTap={{ scale: 0.9 }}
+      whileHover={{ scale: 1.05 }}
       transition={{ duration: 0.2, ease: "easeInOut" }}
       className="group relative p-2 w-10 h-10 flex items-center justify-center"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
@@ -40,7 +41,7 @@ const ThemeToggle = () => {
             exit={{ opacity: 0, filter: "blur(10px)", scale: 0.5, rotate: 90 }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
           >
-            <MoonIcon className="text-muted group-hover:text-foreground transition-colors duration-300" />
+            <MoonIcon className="text-muted group-hover:text-foreground  transition-all duration-300" />
           </motion.div>
         ) : (
           <motion.div

@@ -49,24 +49,28 @@ export default function Home() {
           <div className="flex flex-row gap-3 mb-8">
             <motion.button
               whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
             >
               <XIcon className="text-muted hover:text-foreground transition-colors duration-300" />
             </motion.button>
             <motion.button
               whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
             >
               <InstagramIcon className="text-muted hover:text-foreground transition-colors duration-300" />
             </motion.button>
             <motion.button
               whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
             >
               <LinkedInIcon className="text-muted hover:text-foreground transition-colors duration-300" />
             </motion.button>
             <motion.button
               whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
             >
               <GitHubIcon className="text-muted hover:text-foreground transition-colors duration-300" />
@@ -102,7 +106,7 @@ export default function Home() {
           <ExperienceContainer />
         </Reveal>
         <Reveal delay={0.4}>
-          <MusicCard search="Staying" />
+          <MusicCard search="From the swamp" />
         </Reveal>
       </div>
     </div>
