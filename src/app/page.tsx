@@ -1,6 +1,7 @@
 "use client";
 
 import ExperienceContainer from "@/components/experience/container";
+import MusicCard from "@/components/music-card";
 import ThemeToggle from "@/components/theme-toggle";
 import Reveal from "@/components/ui/reveal";
 import {
@@ -96,8 +97,12 @@ export default function Home() {
             for web.
           </p>
         </Reveal>
-        <Reveal delay={0.4}>
+       
+        <Reveal delay={0.35}>
           <ExperienceContainer />
+        </Reveal>
+        <Reveal delay={0.4}>
+          <MusicCard search="Staying" />
         </Reveal>
       </div>
     </div>
