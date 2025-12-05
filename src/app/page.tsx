@@ -2,6 +2,7 @@
 
 import ExperienceContainer from "@/components/experience/container";
 import MusicCard from "@/components/music-card";
+import ProjectsContainer from "@/components/projects/container";
 import ThemeToggle from "@/components/theme-toggle";
 import Reveal from "@/components/ui/reveal";
 import {
@@ -80,7 +81,7 @@ export default function Home() {
         <Reveal delay={0.3}>
           <p className="text-lg text-muted mb-8">
             I build cool stuff that actually feels good to use whether its a
-            personal/internal tool or a large- scale application. I care about
+            personal/internal tool or a large-scale application. I care about
             the details.{" "}
             <span
               className="italic font-exposure text-foreground"
@@ -101,11 +102,14 @@ export default function Home() {
             for web.
           </p>
         </Reveal>
-       
         <Reveal delay={0.35}>
+          <ProjectsContainer />
+        </Reveal>
+
+        <Reveal delay={0.4}>
           <ExperienceContainer />
         </Reveal>
-        <Reveal delay={0.4}>
+        <Reveal delay={0.45}>
           <MusicCard search="From the swamp" />
         </Reveal>
       </div>

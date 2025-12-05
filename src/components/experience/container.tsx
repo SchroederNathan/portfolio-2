@@ -11,7 +11,7 @@ const experiences: Experience[] = [
     description: `I spend of my time designing, building, and maintaining mobile apps 
         in React Native SwiftUl, and Java with products that reached over 130k monthly 
         active users. I also work on several web applications using React and Laravel. 
-        Besides development, I helped shape parts of our Devups worklow, setting up servers,
+        Besides development, I helped shape parts of our Devops worklow, setting up servers,
          managing CI/CU pipelines. and working with AWS`,
     url: "https://redpiston.com/",
   },

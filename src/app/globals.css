@@ -54,3 +54,13 @@ div[style*="filter"] {
 svg {
   transition: fill 150ms ease-out, stroke 150ms ease-out;
 }
+
+/* Hide scrollbar utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
