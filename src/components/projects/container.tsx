@@ -1,34 +1,10 @@
 "use client";
 
-import ProjectCard, { Project } from "@/components/projects/card";
+import ProjectCard from "@/components/projects/card";
+import { projects } from "@/data/projects";
+import { ArrowUpRightIcon } from "@/components/ui/svg-icons";
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
-
-const projects: Project[] = [
-  {
-    title: "Movati",
-    description: "Class booking and account management app",
-    image: "/images/movati.jpg",
-    tags: ["React Native", "Expo", "Laravel"],
-    video: undefined,
-    url: "https://movatiathletic.com",
-  },
-  {
-    title: "FocusGrid",
-    description: "Productivity app for focused work",
-    image: "/images/focusgrid.png",
-    tags: ["React Native", "Expo"],
-    video: undefined,
-    url: "https://focusgridapp.com",
-  },
-  {
-    title: "Medley",
-    description: "A media tracking and recommendation app",
-    image: "/images/medley.jpg",
-    tags: ["React Native", "Expo", "PostgreSQL"],
-    video: undefined,
-    url: "https://medley.app",
-  },
-];
 
 const ProjectsContainer = () => {
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
@@ -82,7 +58,16 @@ const ProjectsContainer = () => {
 
   return (
     <section id="PROJECTS" className="mb-3">
-      <p className="text-foreground mb-4 font-bold text-xl">Projects</p>
+      <Link
+        href="/projects"
+        className="group flex items-center justify-between mb-4"
+      >
+        <p className="text-foreground font-bold text-xl">Projects</p>
+        <div className="flex items-center gap-1.5 text-muted group-hover:text-foreground transition-colors duration-200">
+          <span className="text-sm">View All</span>
+          <ArrowUpRightIcon size={12} />
+        </div>
+      </Link>
 
       {/* Horizontal scrolling container - extra padding to accommodate hover background overflow */}
       <div className="relative -mx-4 sm:-mx-6 lg:-mx-8">

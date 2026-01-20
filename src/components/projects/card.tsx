@@ -1,17 +1,9 @@
 "use client";
 
+import { Project } from "@/data/projects";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { ArrowUpRightIcon, LinkIcon } from "../ui/svg-icons";
-
-export interface Project {
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-  video?: string;
-  url?: string;
-}
 
 interface ProjectCardProps {
   project: Project;
