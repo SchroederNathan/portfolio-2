@@ -1,7 +1,7 @@
 import { ThemeProvider } from "@/components/theme-provider";
-import ClickSpark from "@/components/ui/click-spark";
 import ExposureFontLoader from "@/components/ui/exposure-font-loader";
 import LightRays from "@/components/ui/light-rays";
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./exposure-fonts.css";
@@ -82,6 +82,7 @@ export default function RootLayout({
           </div>
           {children}
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
