@@ -3,58 +3,13 @@
 import ProjectCard from "@/components/projects/card";
 import { projects } from "@/data/projects";
 import { ArrowUpRightIcon } from "@/components/ui/svg-icons";
+import { useHorizontalScroll } from "@/hooks/useHorizontalScroll";
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 const ProjectsContainer = () => {
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
-
-  const checkScroll = useCallback(() => {
-    if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
-    }
-  }, []);
-
-  useEffect(() => {
-    checkScroll();
-    const scrollEl = scrollRef.current;
-    if (scrollEl) {
-      scrollEl.addEventListener("scroll", checkScroll);
-      window.addEventListener("resize", checkScroll);
-      return () => {
-        scrollEl.removeEventListener("scroll", checkScroll);
-        window.removeEventListener("resize", checkScroll);
-      };
-    }
-  }, [checkScroll]);
-
-  // Build mask based on scroll position
-  const getMaskStyle = () => {
-    const fadeSize = "80px";
-
-    if (canScrollLeft && canScrollRight) {
-      return {
-        maskImage: `linear-gradient(to right, transparent, black ${fadeSize}, black calc(100% - ${fadeSize}), transparent)`,
-        WebkitMaskImage: `linear-gradient(to right, transparent, black ${fadeSize}, black calc(100% - ${fadeSize}), transparent)`,
-      };
-    } else if (canScrollLeft) {
-      return {
-        maskImage: `linear-gradient(to right, transparent, black ${fadeSize})`,
-        WebkitMaskImage: `linear-gradient(to right, transparent, black ${fadeSize})`,
-      };
-    } else if (canScrollRight) {
-      return {
-        maskImage: `linear-gradient(to left, transparent, black ${fadeSize})`,
-        WebkitMaskImage: `linear-gradient(to left, transparent, black ${fadeSize})`,
-      };
-    }
-    return {};
-  };
+  const { scrollRef, getMaskStyle } = useHorizontalScroll();
 
   return (
     <section id="PROJECTS" className="mb-3">

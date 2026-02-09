@@ -70,20 +70,22 @@ const ExperienceCard = ({ experience, isHovered, isAnyHovered, onHoverChange }: 
         <p className="md:hidden block text-muted z-10 mb-3">{dateRange}</p>
 
         {/* Role/Title and Company */}
-        <p className="text-lg text-foreground  flex items-center mb-3">
+        <p className="text-lg text-foreground flex flex-col md:flex-row md:items-center mb-3">
           {experience.role}
-          <span className="text-foreground ms-2">·</span>
-          <span className="text-foreground ms-2"> {experience.company}</span>
-          <motion.span
-            className="-mb-4 ms-2 text-muted group-hover/work:text-foreground group-hover/education:text-foreground transition-colors duration-200"
-            animate={{ 
-              x: isHovered ? 4 : 0, 
-              y: isHovered ? -4 : 0 
-            }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-          >
-            <ArrowUpRightIcon size={14} />
-          </motion.span>
+          <span className="text-foreground ms-2 max-md:hidden">·</span>
+          <span className="text-foreground md:ms-2 inline-flex items-center">
+            {experience.company}
+            <motion.span
+              className="-mb-4 ms-2 text-muted group-hover/work:text-foreground group-hover/education:text-foreground transition-colors duration-200"
+              animate={{
+                x: isHovered ? 4 : 0,
+                y: isHovered ? -4 : 0
+              }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              <ArrowUpRightIcon size={14} />
+            </motion.span>
+          </span>
         </p>
 
         {/* Description */}

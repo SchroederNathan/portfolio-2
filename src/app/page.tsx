@@ -2,6 +2,7 @@
 
 import ExperienceContainer from "@/components/experience/container";
 import MusicCard from "@/components/music-card";
+import PlaygroundContainer from "@/components/playground/container";
 import ProjectsContainer from "@/components/projects/container";
 import ThemeToggle from "@/components/theme-toggle";
 import Reveal from "@/components/ui/reveal";
@@ -104,6 +105,9 @@ export default function Home() {
         </Reveal>
         <Reveal delay={0.35}>
           <ProjectsContainer />
+        </Reveal>
+        <Reveal delay={0.375}>
+          <PlaygroundContainer />
         </Reveal>
 
         <Reveal delay={0.4}>
