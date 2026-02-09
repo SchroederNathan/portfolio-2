@@ -4,14 +4,17 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 export function useHorizontalScroll() {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [leftFade, setLeftFade] = useState(0);
+  const [rightFade, setRightFade] = useState(0);
 
   const checkScroll = useCallback(() => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+      const maxScroll = scrollWidth - clientWidth;
+      const fadeDistance = 150;
+
+      setLeftFade(Math.min(scrollLeft / fadeDistance, 1));
+      setRightFade(maxScroll > 0 ? Math.min((maxScroll - scrollLeft) / fadeDistance, 1) : 0);
     }
   }, []);
 
@@ -29,25 +32,18 @@ export function useHorizontalScroll() {
   }, [checkScroll]);
 
   const getMaskStyle = () => {
-    const fadeSize = "80px";
+    if (leftFade === 0 && rightFade === 0) return {};
 
-    if (canScrollLeft && canScrollRight) {
-      return {
-        maskImage: `linear-gradient(to right, transparent, black ${fadeSize}, black calc(100% - ${fadeSize}), transparent)`,
-        WebkitMaskImage: `linear-gradient(to right, transparent, black ${fadeSize}, black calc(100% - ${fadeSize}), transparent)`,
-      };
-    } else if (canScrollLeft) {
-      return {
-        maskImage: `linear-gradient(to right, transparent, black ${fadeSize})`,
-        WebkitMaskImage: `linear-gradient(to right, transparent, black ${fadeSize})`,
-      };
-    } else if (canScrollRight) {
-      return {
-        maskImage: `linear-gradient(to left, transparent, black ${fadeSize})`,
-        WebkitMaskImage: `linear-gradient(to left, transparent, black ${fadeSize})`,
-      };
-    }
-    return {};
+    const maxFade = 80;
+    const leftSize = Math.round(leftFade * maxFade);
+    const rightSize = Math.round(rightFade * maxFade);
+
+    const gradient = `linear-gradient(to right, transparent, black ${leftSize}px, black calc(100% - ${rightSize}px), transparent)`;
+
+    return {
+      maskImage: gradient,
+      WebkitMaskImage: gradient,
+    };
   };
 
   return { scrollRef, getMaskStyle };
