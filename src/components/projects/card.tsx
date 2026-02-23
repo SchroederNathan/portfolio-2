@@ -3,6 +3,7 @@
 import { Project } from "@/data/projects";
 import { motion } from "motion/react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { ArrowUpRightIcon, LinkIcon } from "../ui/svg-icons";
 
 interface ProjectCardProps {
@@ -12,14 +13,27 @@ interface ProjectCardProps {
   onHoverChange: (hovered: boolean) => void;
 }
 
+const useIsDesktop = () => {
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    setIsDesktop(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return isDesktop;
+};
+
 const ProjectCard = ({
   project,
   isHovered,
   isAnyHovered,
   onHoverChange,
 }: ProjectCardProps) => {
-  // Calculate opacity: dim if any card is hovered but not this one
-  const cardOpacity = isAnyHovered && !isHovered ? 0.5 : 1;
+  const isDesktop = useIsDesktop();
+  // Calculate opacity: dim if any card is hovered but not this one (desktop only)
+  const cardOpacity = isDesktop && isAnyHovered && !isHovered ? 0.5 : 1;
 
   const content = (
     <motion.div
@@ -34,8 +48,8 @@ const ProjectCard = ({
         className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-xl lg:-inset-x-6 lg:block bg-foreground/5 shadow-[inset_0_1px_0.25px_0.25px_rgba(255,255,255,0.1)] drop-shadow-lg"
         initial={{ scale: 0.98, opacity: 0 }}
         animate={{
-          scale: isHovered ? 1 : 0.98,
-          opacity: isHovered ? 1 : 0,
+          scale: isDesktop && isHovered ? 1 : 0.98,
+          opacity: isDesktop && isHovered ? 1 : 0,
         }}
         transition={{ duration: 0.2, ease: "easeOut" }}
       />
