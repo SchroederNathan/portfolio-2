@@ -39,4 +39,14 @@ export const projects: Project[] = [
     video: undefined,
     url: "https://medley.app",
   },
+  {
+    title: "ThemeGen",
+    description: "Theme generator with WCAG contrast auditing",
+    longDescription:
+      "A visual theme generator for creating accessible, shareable color palettes. Pick colors, check contrast ratios against WCAG standards, and export production-ready theme code. Features smart shuffle, color locking, light/dark mode, URL sharing, and export to CSS, Tailwind, and SCSS.",
+    image: "/images/themegen.png",
+    tags: ["Next.js", "Tailwind CSS", "WCAG"],
+    video: undefined,
+    url: "https://themegen.dev",
+  },
 ];
