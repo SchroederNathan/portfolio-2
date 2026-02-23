@@ -29,16 +29,16 @@ export const projects: Project[] = [
     video: undefined,
     url: "https://focusgridapp.com",
   },
-  {
-    title: "Medley",
-    description: "A media tracking and recommendation app",
-    longDescription:
-      "A personal media tracking application that helps users catalog and discover movies, TV shows, books, and music. Features intelligent recommendations based on user preferences and a clean interface for managing your media library.",
-    image: "/images/medley.jpg",
-    tags: ["React Native", "Expo", "PostgreSQL"],
-    video: undefined,
-    url: "https://medley.app",
-  },
+  // {
+  //   title: "Medley",
+  //   description: "A media tracking and recommendation app",
+  //   longDescription:
+  //     "A personal media tracking application that helps users catalog and discover movies, TV shows, books, and music. Features intelligent recommendations based on user preferences and a clean interface for managing your media library.",
+  //   image: "/images/medley.jpg",
+  //   tags: ["React Native", "Expo", "PostgreSQL"],
+  //   video: undefined,
+  //   url: "https://medley.app",
+  // },
   {
     title: "ThemeGen",
     description: "Theme generator with WCAG contrast auditing",
