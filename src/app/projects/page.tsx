@@ -5,10 +5,23 @@ import { ArrowUpRightIcon, LinkIcon } from "@/components/ui/svg-icons";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const useIsDesktop = () => {
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    setIsDesktop(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return isDesktop;
+};
 
 export default function ProjectsPage() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const isDesktop = useIsDesktop();
 
   return (
     <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -41,7 +54,7 @@ export default function ProjectsPage() {
           {projects.map((project, index) => {
             const isHovered = hoveredIndex === index;
             const isAnyHovered = hoveredIndex !== null;
-            const cardOpacity = isAnyHovered && !isHovered ? 0.5 : 1;
+            const cardOpacity = isDesktop && isAnyHovered && !isHovered ? 0.5 : 1;
 
             const content = (
               <motion.div
@@ -57,8 +70,8 @@ export default function ProjectsPage() {
                   className="absolute -inset-4 z-0 hidden rounded-xl lg:block bg-foreground/5 shadow-[inset_0_1px_0.25px_0.25px_rgba(255,255,255,0.1)] drop-shadow-lg"
                   initial={{ scale: 0.98, opacity: 0 }}
                   animate={{
-                    scale: isHovered ? 1 : 0.98,
-                    opacity: isHovered ? 1 : 0,
+                    scale: isDesktop && isHovered ? 1 : 0.98,
+                    opacity: isDesktop && isHovered ? 1 : 0,
                   }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
                 />
