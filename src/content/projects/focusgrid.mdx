@@ -1,0 +1,35 @@
+## Overview
+
+FocusGrid is a habit tracking and productivity app designed to help you build better habits, one day at a time. It's available at [focusgridapp.com](https://focusgridapp.com) and gives users a visual, grid-based system for creating habits, tracking streaks, and staying accountable through social features.
+
+The idea is simple: make habit tracking feel rewarding, not tedious.
+
+## The Challenge
+
+Most habit trackers feel like chores themselves. They're either too complex (20 settings per habit) or too simple (just a checkbox with no context). I wanted to build something in the sweet spot — visually satisfying, easy to use daily, and social enough to keep you motivated without turning into another social media feed.
+
+Key problems to solve:
+
+- Make daily logging fast and frictionless (under 5 seconds)
+- Provide meaningful streak tracking that actually motivates
+- Add social features without overwhelming the core experience
+- Send smart reminders that help without being annoying
+
+## The Solution
+
+I built FocusGrid with **React Native** and **Expo**, focusing on a clean, minimal interface where the grid itself is the main interaction. Each habit gets a cell in your daily grid — tap to log, hold to customize. Streaks build visually, so you can *see* your consistency at a glance.
+
+The social layer is opt-in: share your grid with friends, see their progress, and give each other encouragement. It's accountability without pressure.
+
+## Key Features
+
+- **Habit Creation & Customization** — Create habits with custom names, icons, and frequency goals. Set daily, weekly, or custom schedules that fit your routine.
+- **Daily Logging with Streak Tracking** — Tap to log, watch your streak grow. The grid view gives you a bird's-eye view of your consistency over time.
+- **Social Sharing & Community** — Share your grid with friends, follow others' progress, and build habits together. Optional and non-intrusive.
+- **Daily Reminders & Notifications** — Smart notifications that nudge you at the right time based on your logging patterns, not arbitrary schedules.
+
+## Technical Highlights
+
+Built entirely with React Native and Expo for cross-platform delivery. The grid rendering is optimized for smooth scrolling and quick interactions — no lag when you're rapidly logging your morning habits. Expo's push notification service handles reminders, with scheduling logic that adapts to each user's habits and timezone.
+
+The app uses a component architecture that keeps each habit cell self-contained, making it easy to add new habit types and visualization modes without touching the core grid logic.

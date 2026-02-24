@@ -3,6 +3,7 @@
 import { Project } from "@/data/projects";
 import { motion } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ArrowUpRightIcon, LinkIcon } from "../ui/svg-icons";
 
@@ -35,121 +36,117 @@ const ProjectCard = ({
   // Calculate opacity: dim if any card is hovered but not this one (desktop only)
   const cardOpacity = isDesktop && isAnyHovered && !isHovered ? 0.5 : 1;
 
-  const content = (
-    <motion.div
-      className="group relative flex flex-col w-[320px] shrink-0"
-      onMouseEnter={() => onHoverChange(true)}
-      onMouseLeave={() => onHoverChange(false)}
-      animate={{ opacity: cardOpacity }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
-    >
-      {/* Card background with hover effect - extends beyond content like experience card */}
+  return (
+    <Link href={`/projects/${project.slug}`}>
       <motion.div
-        className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-xl lg:-inset-x-6 lg:block bg-foreground/5 shadow-[inset_0_1px_0.25px_0.25px_rgba(255,255,255,0.1)] drop-shadow-lg"
-        initial={{ scale: 0.98, opacity: 0 }}
-        animate={{
-          scale: isDesktop && isHovered ? 1 : 0.98,
-          opacity: isDesktop && isHovered ? 1 : 0,
-        }}
+        className="group relative flex flex-col w-[320px] shrink-0"
+        onMouseEnter={() => onHoverChange(true)}
+        onMouseLeave={() => onHoverChange(false)}
+        animate={{ opacity: cardOpacity }}
         transition={{ duration: 0.2, ease: "easeOut" }}
-      />
+      >
+        {/* Card background with hover effect - extends beyond content like experience card */}
+        <motion.div
+          className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-xl lg:-inset-x-6 lg:block bg-foreground/5 shadow-[inset_0_1px_0.25px_0.25px_rgba(255,255,255,0.1)] drop-shadow-lg"
+          initial={{ scale: 0.98, opacity: 0 }}
+          animate={{
+            scale: isDesktop && isHovered ? 1 : 0.98,
+            opacity: isDesktop && isHovered ? 1 : 0,
+          }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+        />
 
-      {/* Content container */}
-      <div className="relative z-10 flex flex-col">
-        {/* Title and description */}
-        <div className="mb-4">
-          <p className="text-lg text-foreground flex items-center mb-2">
-            {project.title}
-            <motion.span
-              className="-mb-4 ms-2 text-muted group-hover:text-foreground transition-colors duration-200"
+        {/* Content container */}
+        <div className="relative z-10 flex flex-col">
+          {/* Title and description */}
+          <div className="mb-4">
+            <p className="text-lg text-foreground flex items-center mb-2">
+              {project.title}
+              <motion.span
+                className="-mb-4 ms-2 text-muted group-hover:text-foreground transition-colors duration-200"
+                animate={{
+                  x: isHovered ? 4 : 0,
+                  y: isHovered ? -4 : 0,
+                }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                <ArrowUpRightIcon size={14} />
+              </motion.span>
+            </p>
+            <p className="text-muted text-sm mb-3">{project.description}</p>
+
+            {/* Tags */}
+            {project.tags && project.tags.length > 0 && (
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="px-2 py-1 text-xs text-muted rounded-lg bg-foreground/5 shadow-[inset_0_1px_0.25px_0.25px_rgba(255,255,255,0.1)] drop-shadow-lg"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Media container - image/video at bottom */}
+          <div
+            className="relative w-full rounded-lg bg-foreground/5 shadow-[inset_0_1px_0.25px_0.25px_rgba(255,255,255,0.05)] drop-shadow-lg p-px"
+            style={{ aspectRatio: "1.9047619048" }}
+          >
+            <div className="relative w-full h-full rounded-lg overflow-hidden">
+              {/* Image */}
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                className={`object-cover transition-opacity duration-300 ${
+                  isHovered && project.video ? "opacity-0" : "opacity-100"
+                }`}
+              />
+
+              {/* Video - only shown on hover if available */}
+              {project.video && (
+                <video
+                  src={project.video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+                    isHovered ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+              )}
+            </div>
+          </div>
+
+          {/* URL bar - external link with stopPropagation */}
+          {project.url && (
+            <motion.a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center justify-between gap-2 pt-3"
               animate={{
-                x: isHovered ? 4 : 0,
-                y: isHovered ? -4 : 0,
+                opacity: isHovered ? 1 : 0,
+                filter: isHovered ? "blur(0px)" : "blur(4px)",
+                y: isHovered ? 0 : -8,
               }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <ArrowUpRightIcon size={14} />
-            </motion.span>
-          </p>
-          <p className="text-muted text-sm mb-3">{project.description}</p>
-          
-          {/* Tags */}
-          {project.tags && project.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {project.tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="px-2 py-1 text-xs text-muted rounded-lg bg-foreground/5 shadow-[inset_0_1px_0.25px_0.25px_rgba(255,255,255,0.1)] drop-shadow-lg"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+              <span className="text-xs text-muted truncate flex-1">
+                {project.url}
+              </span>
+              <LinkIcon size={14} className="text-muted shrink-0" />
+            </motion.a>
           )}
         </div>
-
-        {/* Media container - image/video at bottom */}
-        <div
-          className="relative w-full rounded-lg bg-foreground/5 shadow-[inset_0_1px_0.25px_0.25px_rgba(255,255,255,0.05)] drop-shadow-lg p-px"
-          style={{ aspectRatio: "1.9047619048" }}
-        >
-          <div className="relative w-full h-full rounded-lg overflow-hidden">
-            {/* Image */}
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              className={`object-cover transition-opacity duration-300 ${
-                isHovered && project.video ? "opacity-0" : "opacity-100"
-              }`}
-            />
-
-            {/* Video - only shown on hover if available */}
-            {project.video && (
-              <video
-                src={project.video}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
-                  isHovered ? "opacity-100" : "opacity-0"
-                }`}
-              />
-            )}
-          </div>
-        </div>
-
-        {/* URL bar - always takes space, animates visibility on hover */}
-        {project.url && (
-          <motion.div
-            className="flex items-center justify-between gap-2 pt-3"
-            animate={{
-              opacity: isHovered ? 1 : 0,
-              filter: isHovered ? "blur(0px)" : "blur(4px)",
-              y: isHovered ? 0 : -8,
-            }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-          >
-            <span className="text-xs text-muted truncate flex-1">
-              {project.url}
-            </span>
-            <LinkIcon size={14} className="text-muted shrink-0" />
-          </motion.div>
-        )}
-      </div>
-    </motion.div>
+      </motion.div>
+    </Link>
   );
-
-  if (project.url) {
-    return (
-      <a href={project.url} target="_blank" rel="noopener noreferrer">
-        {content}
-      </a>
-    );
-  }
-
-  return content;
 };
 
 export default ProjectCard;

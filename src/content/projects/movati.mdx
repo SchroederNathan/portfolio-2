@@ -1,0 +1,33 @@
+## Overview
+
+Movati Athletic is a Canadian fitness club chain with locations across Ontario. Their members needed a modern, mobile-first way to book classes, manage their accounts, and stay connected with their fitness community — without having to call the front desk or log into a clunky web portal.
+
+I built the Movati app to bring that entire experience into members' pockets.
+
+## The Challenge
+
+Movati's existing booking flow was web-based and not optimized for mobile. Members were frustrated with the multi-step process to reserve a spot in popular classes, and the gym's staff was fielding constant calls for account inquiries. The app needed to:
+
+- Handle real-time class availability across multiple club locations
+- Support account management (membership details, billing, profile)
+- Work seamlessly on both iOS and Android from a single codebase
+- Integrate with Movati's existing backend infrastructure
+
+## The Solution
+
+I built a cross-platform mobile app using **React Native** and **Expo**, connected to a **Laravel** API backend. Expo's managed workflow kept the development cycle fast — hot reloading, OTA updates, and a single codebase for both platforms.
+
+The Laravel backend handles authentication, class scheduling logic, and account data, exposing a clean REST API that the app consumes. This architecture keeps the mobile app lightweight while the server handles the heavy lifting.
+
+## Key Features
+
+- **Class Scheduling** — Browse upcoming classes by location, time, and instructor. Reserve your spot with a single tap, with real-time availability updates.
+- **Account Management** — View membership details, update profile info, and manage billing — all without calling the front desk.
+- **Multi-Location Support** — Switch between Movati club locations and see schedules specific to each gym.
+- **Cross-Platform** — One codebase powers both the iOS and Android apps, ensuring feature parity and consistent UX across devices.
+
+## Technical Highlights
+
+The app uses React Native's navigation stack for a fluid, native-feeling experience. Expo's build service handles the CI/CD pipeline, producing signed builds for both app stores. On the backend, Laravel's queue system processes booking confirmations and notifications asynchronously, keeping the API responsive even during peak booking times.
+
+State management is handled with React's built-in context and hooks — no Redux overhead for an app of this scope. The result is a snappy, maintainable codebase that's easy to extend as Movati adds new features.
