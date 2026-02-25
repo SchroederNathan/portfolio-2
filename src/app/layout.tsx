@@ -1,6 +1,5 @@
 import { ThemeProvider } from "@/components/theme-provider";
-import ExposureFontLoader from "@/components/ui/exposure-font-loader";
-import LightRays from "@/components/ui/light-rays";
+import LightRaysWrapper from "@/components/ui/light-rays-wrapper";
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -112,19 +111,8 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
         >
-          <ExposureFontLoader />
-
           <div className="fixed inset-0 pointer-events-none z-0">
-            <LightRays
-              raysOrigin="top-center"
-              raysSpeed={1}
-              lightSpread={1}
-              rayLength={1}
-              followMouse={true}
-              mouseInfluence={0.1}
-              noiseAmount={0.1}
-              distortion={0.05}
-            />
+            <LightRaysWrapper />
           </div>
           {children}
         </ThemeProvider>

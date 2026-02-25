@@ -2,13 +2,14 @@
 
 import { ArrowUpRightIcon } from "../ui/svg-icons";
 import { motion } from "motion/react";
+import { ReactNode } from "react";
 
 export interface Experience {
   role: string;
   company: string;
   startDate: Date;
   endDate?: Date;
-  description: string;
+  description: ReactNode;
   url?: string;
 }
 

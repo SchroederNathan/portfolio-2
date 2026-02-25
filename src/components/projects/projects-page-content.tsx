@@ -5,23 +5,10 @@ import { ArrowUpRightIcon, LinkIcon } from "@/components/ui/svg-icons";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
-
-const useIsDesktop = () => {
-  const [isDesktop, setIsDesktop] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
-    setIsDesktop(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-  return isDesktop;
-};
+import { useState } from "react";
 
 export default function ProjectsPageContent() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const isDesktop = useIsDesktop();
 
   return (
     <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -30,7 +17,7 @@ export default function ProjectsPageContent() {
           href="/"
           className="group flex items-center gap-3 mb-8"
         >
-          <div className="text-muted group-hover:text-foreground transition-colors duration-200">
+          <div className="text-muted group-hover:text-foreground transition-colors duration-200 -ms-1">
             <svg
               width="20"
               height="20"
@@ -47,14 +34,14 @@ export default function ProjectsPageContent() {
               />
             </svg>
           </div>
-          <h1 className="text-foreground font-bold text-2xl">All Projects</h1>
+          <h1 className="text-foreground font-bold text-xl">All Projects</h1>
         </Link>
 
         <div className="flex flex-col gap-8">
           {projects.map((project, index) => {
             const isHovered = hoveredIndex === index;
             const isAnyHovered = hoveredIndex !== null;
-            const cardOpacity = isDesktop && isAnyHovered && !isHovered ? 0.5 : 1;
+            const cardOpacity = isAnyHovered && !isHovered ? 0.5 : 1;
 
             return (
               <Link
@@ -73,8 +60,8 @@ export default function ProjectsPageContent() {
                     className="absolute -inset-4 z-0 hidden rounded-xl lg:block bg-foreground/5 shadow-[inset_0_1px_0.25px_0.25px_rgba(255,255,255,0.1)] drop-shadow-lg"
                     initial={{ scale: 0.98, opacity: 0 }}
                     animate={{
-                      scale: isDesktop && isHovered ? 1 : 0.98,
-                      opacity: isDesktop && isHovered ? 1 : 0,
+                      scale: isHovered ? 1 : 0.98,
+                      opacity: isHovered ? 1 : 0,
                     }}
                     transition={{ duration: 0.2, ease: "easeOut" }}
                   />
@@ -137,18 +124,20 @@ export default function ProjectsPageContent() {
                     {/* Right: External link */}
                     {project.url && (
                       <div className="flex items-center sm:items-start shrink-0">
-                        <a
-                          href={project.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex items-center gap-2 hover:text-foreground transition-colors duration-200"
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            window.open(project.url, "_blank", "noopener,noreferrer");
+                          }}
+                          className="flex items-center gap-2 hover:text-foreground transition-colors duration-200 cursor-pointer"
                         >
                           <span className="text-xs text-muted truncate max-w-[120px] sm:max-w-[150px]">
                             {project.url.replace(/^https?:\/\//, "")}
                           </span>
                           <LinkIcon size={14} className="text-muted shrink-0" />
-                        </a>
+                        </button>
                       </div>
                     )}
                   </div>

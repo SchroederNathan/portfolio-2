@@ -127,9 +127,6 @@ const LightRays: React.FC<LightRaysProps> = ({
   const currentColorRef = useRef<[number, number, number]>([1, 1, 1]);
   const [opacity, setOpacity] = useState<number>(0.5); // Default to light mode opacity
 
-  // Track a counter to force re-render when DOM theme changes
-  const [, setThemeCheckCounter] = useState(0);
-
   // Watch for theme changes and update foreground color
   useEffect(() => {
     const updateMutedColor = () => {
@@ -139,36 +136,27 @@ const LightRays: React.FC<LightRaysProps> = ({
     };
 
     const updateOpacity = () => {
-      // Only update opacity on client side to avoid hydration mismatch
       if (typeof window === "undefined") return;
-      
-      const computedOpacity = resolvedTheme === "light" 
-        ? 0.5 
-        : resolvedTheme === "dark" 
-        ? 1.0 
+
+      const computedOpacity = resolvedTheme === "light"
+        ? 0.5
+        : resolvedTheme === "dark"
+        ? 1.0
         : document.documentElement.classList.contains("dark")
         ? 1.0
         : 0.5;
-      
-      setOpacity(computedOpacity);
-    };
 
-    const checkTheme = () => {
-      // Force re-render when DOM theme class changes
-      // This ensures opacity updates even if resolvedTheme hasn't updated yet
-      setThemeCheckCounter(prev => prev + 1);
-      updateOpacity();
+      setOpacity(computedOpacity);
     };
 
     // Initial update
     updateMutedColor();
     updateOpacity();
-    checkTheme();
 
     // Watch for theme class changes on html element
     const observer = new MutationObserver(() => {
       updateMutedColor();
-      checkTheme();
+      updateOpacity();
     });
 
     observer.observe(document.documentElement, {
@@ -176,16 +164,8 @@ const LightRays: React.FC<LightRaysProps> = ({
       attributeFilter: ["class"],
     });
 
-    // Also watch for CSS variable changes via a polling mechanism
-    // (since MutationObserver doesn't catch CSS variable changes)
-    const interval = setInterval(() => {
-      updateMutedColor();
-      checkTheme();
-    }, 100);
-
     return () => {
       observer.disconnect();
-      clearInterval(interval);
     };
   }, [resolvedTheme]);
 

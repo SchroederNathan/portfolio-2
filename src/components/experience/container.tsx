@@ -8,11 +8,21 @@ const experiences: Experience[] = [
     role: "Software Developer",
     company: "Red Piston",
     startDate: new Date("2025-04-01"),
-    description: `I spend of my time designing, building, and maintaining mobile apps 
-        in React Native SwiftUl, and Java with products that reached over 130k monthly 
-        active users. I also work on several web applications using React and Laravel. 
-        Besides development, I helped shape parts of our Devops worklow, setting up servers,
-         managing CI/CU pipelines. and working with AWS`,
+    description: (
+      <>
+        I spend of my time designing, building, and maintaining mobile apps in React
+        Native SwiftUl, and Java with products that reached over{" "}
+        <span
+          className="italic font-exposure text-foreground"
+          style={{ fontFamily: "Exposure-30" }}
+        >
+          130k monthly active users
+        </span>
+        . I also work on several web applications using React and Laravel. Besides
+        development, I helped shape parts of our Devops worklow, setting up servers,
+        managing CI/CU pipelines. and working with AWS
+      </>
+    ),
     url: "https://redpiston.com/",
   },
   {
