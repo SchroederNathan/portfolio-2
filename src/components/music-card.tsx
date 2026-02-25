@@ -3,7 +3,7 @@
 import { motion, useMotionValue, useTransform } from "motion/react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { PauseIcon, PlayIcon } from "./ui/svg-icons";
+import { PauseIcon, PlayIcon, SpotifyIcon } from "./ui/svg-icons";
 
 interface MusicCardProps {
   trackId?: string;
@@ -357,6 +357,12 @@ const MusicCard = ({ trackId, search, spotifyTopTrack }: MusicCardProps) => {
 
   return (
     <div className="group/music mb-8" id="music-card">
+      {spotifyTopTrack && (
+        <div className="flex items-center gap-2 mb-3 text-muted">
+          <SpotifyIcon size={16} />
+          <span className="text-sm">currently on repeat</span>
+        </div>
+      )}
       <div className="flex flex-row items-center gap-4 relative pb-1 transition-all ">
         {/* Album Art with Play Button Overlay */}
         <div className="relative">
