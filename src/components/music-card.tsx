@@ -360,7 +360,7 @@ const MusicCard = ({ trackId, search, spotifyTopTrack }: MusicCardProps) => {
       {spotifyTopTrack && (
         <div className="flex items-center gap-2 mb-3 text-muted">
           <SpotifyIcon size={16} />
-          <span className="text-sm">currently on repeat</span>
+          <span className="text-sm mb-1">what i'm playing</span>
         </div>
       )}
       <div className="flex flex-row items-center gap-4 relative pb-1 transition-all ">
