@@ -14,19 +14,29 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const project = projects.find((p) => p.slug === params.slug);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
   if (!project) return {};
   return {
-    title: `${project.title} — Nate Schroeder`,
+    title: project.title,
     description: project.description,
+    openGraph: {
+      title: `${project.title} — Nathan Schroeder`,
+      description: project.description,
+      images: [project.image],
+    },
   };
 }
 
 const mdxComponents = {
   h2: (props: React.ComponentProps<"h2">) => (
     <h2
-      className="text-2xl font-bold text-foreground mt-12 mb-4"
+      className="text-xl  text-foreground mt-12 mb-4"
       {...props}
     />
   ),
@@ -172,7 +182,7 @@ export default async function ProjectDetailPage({
             <div className="relative w-full h-full rounded-lg overflow-hidden">
               <Image
                 src={project.image}
-                alt={project.title}
+                alt={`Screenshot of ${project.title} — ${project.description}`}
                 fill
                 className="object-cover object-top"
                 priority

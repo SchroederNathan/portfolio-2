@@ -25,7 +25,6 @@ export default function Home() {
       className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
     >
       <div className="mx-auto max-w-3xl sm:py-32 py-16 lg:pb-40">
-        <h1 className="sr-only">Nathan Schroeder</h1>
         <Reveal delay={0}>
           <div className="flex flex-row justify-between gap-3 mb-3">
             <h1 className="text-4xl font-exposure">
@@ -49,34 +48,46 @@ export default function Home() {
         </Reveal>
         <Reveal delay={0.2}>
           <div className="flex flex-row gap-3 mb-8">
-            <motion.button
+            <motion.a
+              href="https://x.com/nater02"
+              target="_blank"
+              rel="noopener noreferrer"
               whileTap={{ scale: 0.9 }}
-              whileHover={{ scale: 1.05, cursor: "pointer" }}
+              whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
             >
               <XIcon className="text-muted hover:text-foreground transition-colors duration-300" />
-            </motion.button>
-            <motion.button
+            </motion.a>
+            <motion.a
+              href="https://www.instagram.com/nathanschroederr/"
+              target="_blank"
+              rel="noopener noreferrer"
               whileTap={{ scale: 0.9 }}
-              whileHover={{ scale: 1.05, cursor: "pointer" }}
+              whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
             >
               <InstagramIcon className="text-muted hover:text-foreground transition-colors duration-300" />
-            </motion.button>
-            <motion.button
+            </motion.a>
+            <motion.a
+              href="https://www.linkedin.com/in/nathan-schroeder-a40aa2210/"
+              target="_blank"
+              rel="noopener noreferrer"
               whileTap={{ scale: 0.9 }}
-              whileHover={{ scale: 1.05, cursor: "pointer" }}
+              whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
             >
               <LinkedInIcon className="text-muted hover:text-foreground transition-colors duration-300" />
-            </motion.button>
-            <motion.button
+            </motion.a>
+            <motion.a
+              href="https://github.com/SchroederNathan"
+              target="_blank"
+              rel="noopener noreferrer"
               whileTap={{ scale: 0.9 }}
-              whileHover={{ scale: 1.05, cursor: "pointer" }}
+              whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
             >
               <GitHubIcon className="text-muted hover:text-foreground transition-colors duration-300" />
-            </motion.button>
+            </motion.a>
           </div>
         </Reveal>
         <Reveal delay={0.3}>

@@ -40,8 +40,30 @@ const exposure = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Nathan Schroeder",
-  description: "Software Developer, UI/UX Designer",
+  metadataBase: new URL("https://nathanschroeder.dev"),
+  title: {
+    default: "Nathan Schroeder — Software Developer & UI/UX Designer",
+    template: "%s — Nathan Schroeder",
+  },
+  description:
+    "Software developer and UI/UX designer specializing in React Native and Next.js. Building apps like Movati (130K+ users), FocusGrid, and ThemeGen.",
+  authors: [{ name: "Nathan Schroeder" }],
+  openGraph: {
+    title: "Nathan Schroeder — Software Developer & UI/UX Designer",
+    description:
+      "Software developer and UI/UX designer specializing in React Native and Next.js.",
+    url: "https://nathanschroeder.dev",
+    siteName: "Nathan Schroeder",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nathan Schroeder — Software Developer & UI/UX Designer",
+    description:
+      "Software developer and UI/UX designer specializing in React Native and Next.js.",
+    creator: "@nater02",
+  },
   icons: {
     icon: [
       { url: "/favicon/favicon.ico", sizes: "any" },
@@ -61,6 +83,30 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${satoshi.variable} ${exposure.variable}`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Nathan Schroeder",
+              url: "https://nathanschroeder.dev",
+              jobTitle: "Software Developer",
+              knowsAbout: [
+                "React Native",
+                "Next.js",
+                "UI/UX Design",
+                "TypeScript",
+              ],
+              sameAs: [
+                "https://github.com/SchroederNathan",
+                "https://www.linkedin.com/in/nathan-schroeder-a40aa2210/",
+                "https://x.com/nater02",
+                "https://www.instagram.com/nathanschroederr/",
+              ],
+            }),
+          }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
