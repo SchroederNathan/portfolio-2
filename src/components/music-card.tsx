@@ -3,11 +3,12 @@
 import { motion, useMotionValue, useTransform } from "motion/react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { PauseIcon, PlayIcon } from "./ui/svg-icons";
+import { PauseIcon, PlayIcon, SpotifyIcon } from "./ui/svg-icons";
 
 interface MusicCardProps {
   trackId?: string;
   search?: string;
+  spotifyTopTrack?: boolean;
 }
 
 interface TrackData {
@@ -27,7 +28,7 @@ const formatTime = (seconds: number): string => {
   return `${mins}:${secs.toString().padStart(2, "0")}`;
 };
 
-const MusicCard = ({ trackId, search }: MusicCardProps) => {
+const MusicCard = ({ trackId, search, spotifyTopTrack }: MusicCardProps) => {
   const [trackData, setTrackData] = useState<TrackData | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -51,11 +52,13 @@ const MusicCard = ({ trackId, search }: MusicCardProps) => {
         setIsLoading(true);
         setError(null);
 
-        let url = "/api/itunes/track?";
-        if (trackId) {
-          url += `id=${trackId}`;
+        let url: string;
+        if (spotifyTopTrack) {
+          url = "/api/spotify/top-track";
+        } else if (trackId) {
+          url = `/api/itunes/track?id=${trackId}`;
         } else if (search) {
-          url += `search=${encodeURIComponent(search)}`;
+          url = `/api/itunes/track?search=${encodeURIComponent(search)}`;
         } else {
           throw new Error("Track ID or search query required");
         }
@@ -77,7 +80,7 @@ const MusicCard = ({ trackId, search }: MusicCardProps) => {
     };
 
     fetchTrack();
-  }, [trackId, search]);
+  }, [trackId, search, spotifyTopTrack]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -354,6 +357,12 @@ const MusicCard = ({ trackId, search }: MusicCardProps) => {
 
   return (
     <div className="group/music mb-8" id="music-card">
+      {spotifyTopTrack && (
+        <div className="flex items-center gap-2 mb-3 text-muted">
+          <SpotifyIcon size={16} />
+          <span className="text-sm mb-1">what i'm playing</span>
+        </div>
+      )}
       <div className="flex flex-row items-center gap-4 relative pb-1 transition-all ">
         {/* Album Art with Play Button Overlay */}
         <div className="relative">
