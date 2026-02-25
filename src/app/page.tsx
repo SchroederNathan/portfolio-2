@@ -114,7 +114,7 @@ export default function Home() {
           <ExperienceContainer />
         </Reveal>
         <Reveal delay={0.45}>
-          <MusicCard search="From the swamp" />
+          <MusicCard spotifyTopTrack />
         </Reveal>
       </div>
     </div>
