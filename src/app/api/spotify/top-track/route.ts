@@ -35,7 +35,7 @@ export async function GET() {
 
     // Get top track from short_term (last ~4 weeks)
     const topTracksRes = await fetch(
-      "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=1",
+      "https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=1",
       {
         headers: { Authorization: `Bearer ${accessToken}` },
         next: { revalidate: 3600 }, // cache for 1 hour
