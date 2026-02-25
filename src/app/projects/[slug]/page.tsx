@@ -6,7 +6,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/ui/reveal";
-import { ArrowUpRightIcon } from "@/components/ui/svg-icons";
+import { ProjectUrl } from "@/components/projects/project-url";
 
 export function generateStaticParams() {
   return projects.map((project) => ({
@@ -160,15 +160,7 @@ export default async function ProjectDetailPage({
         {/* External URL */}
         {project.url && (
           <Reveal delay={0.25}>
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors duration-200 mb-8"
-            >
-              <span>{project.url.replace(/^https?:\/\//, "")}</span>
-              <ArrowUpRightIcon size={14} />
-            </a>
+            <ProjectUrl url={project.url} />
           </Reveal>
         )}
 

@@ -124,12 +124,14 @@ const ProjectCard = ({
 
           {/* URL bar - external link with stopPropagation */}
           {project.url && (
-            <motion.a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="flex items-center justify-between gap-2 pt-3"
+            <motion.div
+              role="link"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                window.open(project.url, "_blank", "noopener,noreferrer");
+              }}
+              className="flex items-center justify-between gap-2 pt-3 cursor-pointer"
               animate={{
                 opacity: isHovered ? 1 : 0,
                 filter: isHovered ? "blur(0px)" : "blur(4px)",
@@ -141,7 +143,7 @@ const ProjectCard = ({
                 {project.url}
               </span>
               <LinkIcon size={14} className="text-muted shrink-0" />
-            </motion.a>
+            </motion.div>
           )}
         </div>
       </motion.div>
