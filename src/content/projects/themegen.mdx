@@ -1,0 +1,41 @@
+## Overview
+
+ThemeGen is a visual theme generator for creating accessible color palettes, live at [themegen.dev](https://themegen.dev). Pick your colors, see them applied to a real site preview in real time, and export production-ready code. Every palette is audited against WCAG contrast standards, so you know your theme is accessible before you ship it.
+
+No more guessing if your colors work together. No more failing accessibility audits after the fact.
+
+## The Challenge
+
+Picking colors for a website sounds easy until you're three hours into it, juggling hex codes between Figma, a contrast checker, and your code editor. The existing tools either focus on aesthetics (no contrast checking) or accessibility (ugly palettes). I wanted both — beautiful themes that are guaranteed accessible.
+
+The specific problems:
+
+- Designers pick colors that look great but fail WCAG contrast requirements
+- Developers waste time converting between color formats and design tools
+- There's no quick way to preview how a full palette looks on a real layout
+- Sharing themes between team members usually means copying hex codes into Slack
+
+## The Solution
+
+ThemeGen is built with **Next.js 15**, **React 19**, and **Tailwind v4**. The entire app is a live playground — every color change instantly updates a full site preview so you can see exactly how your palette looks in context. Behind the scenes, **chroma-js** handles all the color math, and the contrast auditing runs continuously as you adjust colors.
+
+The landing page features a bento grid layout with **Paper Design shader** backgrounds for a polished, modern feel.
+
+## Key Features
+
+- **Real-Time Live Preview** — See your entire color palette applied to a full site layout as you adjust colors. No save-and-refresh cycle.
+- **WCAG Contrast Auditing** — Continuous contrast ratio checking with strict thresholds: text/background at 7:1, primary/background at 3:1, text/secondary at 4.5:1, and accent at 3:1. Every combination is validated in real time.
+- **Smart Shuffle** — Generate random palettes that pass all contrast checks automatically. Lock specific colors you like and shuffle the rest — the algorithm respects your locks while ensuring accessibility.
+- **Light & Dark Mode** — Design independent palettes for light and dark modes, each with their own contrast validation.
+- **URL Sharing** — Your theme encodes directly into URL parameters. Share a link and the recipient sees your exact palette — no accounts, no saving, no friction.
+- **Export Options** — Export to CSS custom properties, Tailwind v3 config, Tailwind v4 theme, or SCSS variables. Output formats include hex, RGB, and HSL.
+- **EyeDropper API** — Pick colors directly from anywhere on your screen using the browser's native EyeDropper API.
+- **Preset Themes** — Start from curated, accessible presets and customize from there.
+
+## Technical Highlights
+
+The app is built on Next.js 15 with the React 19 compiler enabled for optimal performance. Tailwind v4's CSS-first configuration keeps the styling system lean. Color calculations use chroma-js for perceptually uniform color manipulation — important for generating palettes that actually look good, not just mathematically balanced.
+
+The URL sharing system encodes the entire theme state into query parameters using a compact encoding scheme, keeping URLs shareable while preserving every color and setting. The contrast auditing engine runs on every color change with zero perceptible delay, giving instant feedback as you explore.
+
+Paper Design shaders power the visual effects on the landing page bento grid, adding depth and motion without impacting performance.

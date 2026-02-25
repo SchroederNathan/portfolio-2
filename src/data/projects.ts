@@ -1,5 +1,6 @@
 export interface Project {
   title: string;
+  slug: string;
   description: string;
   longDescription?: string;
   image: string;
@@ -11,6 +12,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     title: "Movati",
+    slug: "movati",
     description: "Class booking and account management app",
     longDescription:
       "A comprehensive fitness app for Movati Athletic members to book classes, manage their accounts, and track their fitness journey. Built with React Native and Expo for cross-platform support, with a Laravel backend for robust API functionality.",
@@ -21,6 +23,7 @@ export const projects: Project[] = [
   },
   {
     title: "FocusGrid",
+    slug: "focusgrid",
     description: "Productivity app for focused work",
     longDescription:
       "A minimalist productivity application designed to help users stay focused and accomplish their goals. Features include customizable focus sessions, task management, and progress tracking to boost daily productivity.",
@@ -31,6 +34,7 @@ export const projects: Project[] = [
   },
   // {
   //   title: "Medley",
+  //   slug: "medley",
   //   description: "A media tracking and recommendation app",
   //   longDescription:
   //     "A personal media tracking application that helps users catalog and discover movies, TV shows, books, and music. Features intelligent recommendations based on user preferences and a clean interface for managing your media library.",
@@ -41,6 +45,7 @@ export const projects: Project[] = [
   // },
   {
     title: "ThemeGen",
+    slug: "themegen",
     description: "Theme generator with WCAG contrast auditing",
     longDescription:
       "A visual theme generator for creating accessible, shareable color palettes. Pick colors, check contrast ratios against WCAG standards, and export production-ready theme code. Features smart shuffle, color locking, light/dark mode, URL sharing, and export to CSS, Tailwind, and SCSS.",
