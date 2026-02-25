@@ -1,12 +1,12 @@
+import { ProjectUrl } from "@/components/projects/project-url";
+import { Reveal } from "@/components/ui/reveal";
 import { projects } from "@/data/projects";
-import { notFound } from "next/navigation";
 import fs from "fs";
-import path from "path";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import Link from "next/link";
-import { Reveal } from "@/components/ui/reveal";
-import { ProjectUrl } from "@/components/projects/project-url";
+import { notFound } from "next/navigation";
+import path from "path";
 
 export function generateStaticParams() {
   return projects.map((project) => ({
@@ -26,7 +26,7 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
 const mdxComponents = {
   h2: (props: React.ComponentProps<"h2">) => (
     <h2
-      className="text-2xl font-bold text-foreground mt-12 mb-4 font-exposure"
+      className="text-2xl font-bold text-foreground mt-12 mb-4"
       {...props}
     />
   ),
@@ -49,7 +49,9 @@ const mdxComponents = {
     <li className="text-muted leading-relaxed pl-1" {...props} />
   ),
   strong: (props: React.ComponentProps<"strong">) => (
-    <strong className="text-foreground font-semibold" {...props} />
+
+    <strong className="text-foreground font-semibold font-exposure italic"
+      style={{ fontFamily: "Exposure-30" }} {...props} />
   ),
   a: (props: React.ComponentProps<"a">) => (
     <a
@@ -134,7 +136,7 @@ export default async function ProjectDetailPage({
 
         {/* Header */}
         <Reveal delay={0.1}>
-          <h1 className="text-4xl font-exposure text-foreground mb-3">
+          <h1 className="text-4xl font-exposure text-foreground font-black mb-3">
             {project.title}
           </h1>
         </Reveal>
