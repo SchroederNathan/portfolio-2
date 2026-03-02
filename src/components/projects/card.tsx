@@ -88,6 +88,7 @@ const ProjectCard = ({
                 src={project.image}
                 alt={project.title}
                 fill
+                sizes="(max-width: 640px) 100vw, 320px"
                 className={`object-cover transition-opacity duration-300 ${
                   isHovered && project.video ? "opacity-0" : "opacity-100"
                 }`}

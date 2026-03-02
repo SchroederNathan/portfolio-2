@@ -371,7 +371,7 @@ const MusicCard = ({ trackId, search, spotifyTopTrack }: MusicCardProps) => {
               width={96}
               height={96}
               src={trackData.artwork}
-              alt={trackData.album}
+              alt={`${trackData.name} by ${trackData.artist} — album art`}
               className="w-full h-full object-cover"
             />
           </div>
