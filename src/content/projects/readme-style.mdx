@@ -1,0 +1,37 @@
+## Overview
+
+readme.style is a README generator that makes it effortless to write polished, professional documentation. Pick a template, fill in the form, and get production-ready Markdown instantly — no more staring at a blank file or copying from old projects.
+
+It's live at [readme.style](https://readme.style) and completely free to use.
+
+## The Challenge
+
+Every developer knows the README problem: you've just finished building something cool, but now you have to write documentation for it. The blank page is intimidating, writing from scratch is tedious, and existing templates are either too basic or locked behind an account.
+
+- Starting from scratch every time wastes 30-60 minutes per project
+- Generic templates don't fit the kind of project you're building (a SaaS product needs different docs than a CLI tool)
+- Keeping badges, shields, and links consistent is error-prone busywork
+- GitHub stat badges require knowing the right Shields.io URL syntax by heart
+
+## The Solution
+
+readme.style is built with **Next.js**, **TypeScript**, and **Tailwind CSS**. The interface splits into two panels: a form on the left and a live Markdown preview on the right. Every keystroke updates the preview instantly with zero delay — there's no "generate" button to click.
+
+GitHub repo import uses the GitHub REST API to auto-fill the form: project name, description, author, tech stack (from the primary language and topics), homepage URL, and license. One click saves minutes of copy-pasting.
+
+## Key Features
+
+- **5 Templates** — Minimal (clean one-pager), Detailed (full docs with TOC), Startup (pitch-ready with features + CTA), SaaS (product overview with pricing table), and CLI Tool (commands table with flags).
+- **GitHub Import** — Paste any public repo URL and hit Import. The tool fetches repo metadata from the GitHub API and pre-fills every field it can find.
+- **Auto-generated Badges** — GitHub stars, forks, issues, license, and tech stack badges are generated automatically from the repo URL and form data using Shields.io.
+- **Live Preview** — The Markdown output updates in real time as you type. No save step, no reload.
+- **Copy & Download** — One click to copy the raw Markdown to your clipboard or download it as `README.md`.
+- **Mobile Friendly** — Tabbed interface on small screens switches between the edit form and the preview.
+
+## Technical Highlights
+
+The template engine is a set of pure TypeScript functions that take a `ProjectData` object and return a Markdown string. This keeps templates deterministic, testable, and completely decoupled from the UI — adding a new template is just writing a new function.
+
+Badge generation parses the GitHub repo URL to extract the `owner/repo` slug, then constructs Shields.io URLs for stars, forks, and issues. Tech stack badges map common framework names to pre-configured Shields.io badge strings with correct logos and brand colors.
+
+The GitHub import hits `api.github.com/repos/{owner}/{repo}` client-side with no backend required. It merges fetched data with whatever the user has already typed — existing fields are never overwritten, so it's always safe to import after starting to fill in the form.

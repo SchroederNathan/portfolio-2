@@ -48,10 +48,21 @@ export const projects: Project[] = [
     slug: "themegen",
     description: "Theme generator with WCAG contrast auditing",
     longDescription:
-      "A visual theme generator for creating accessible, shareable color palettes. Pick colors, check contrast ratios against WCAG standards, and export production-ready theme code. Features smart shuffle, color locking, light/dark mode, URL sharing, and export to CSS, Tailwind, and SCSS.",
+      "A visual theme generator for creating accessible, shareable color palettes. Pick colors, check contrast ratios against WCAG standards, and export production-ready theme code. Features smart shuffle, color locking, light/dark mode, URL sharing, and export to CSS, Tailwind, SCSS, and more.",
     image: "/images/themegen.png",
     tags: ["Next.js", "Tailwind CSS", "WCAG"],
     video: undefined,
     url: "https://themegen.dev",
+  },
+  {
+    title: "readme.style",
+    slug: "readme-style",
+    description: "Beautiful README generator with 5 templates",
+    longDescription:
+      "Stop shipping ugly READMEs. readme.style lets you fill in a form, pick from 5 professional templates (Minimal, Detailed, Startup, SaaS, CLI), and get polished Markdown instantly. Features GitHub repo import that auto-fills your project info, live preview, copy-to-clipboard, and download.",
+    image: "/images/readme-style.png",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+    video: undefined,
+    url: "https://readme.style",
   },
 ];
