@@ -54,4 +54,26 @@ export const projects: Project[] = [
     video: undefined,
     url: "https://themegen.dev",
   },
+  {
+    title: "favicon-gen",
+    slug: "favicon-gen",
+    description: "Generate all favicon sizes instantly — from image, emoji, or color",
+    longDescription:
+      "A browser-based favicon generator that creates all 7 PNG sizes (16px to 512px), a ZIP with HTML snippets and manifest.json, and Apple-style rounded corners on large icons — all from an uploaded image, typed emoji, or solid color. No backend, no uploads, no accounts.",
+    image: "/images/favicon-gen.png",
+    tags: ["Next.js", "TypeScript", "Canvas API"],
+    video: undefined,
+    url: "https://favicon-gen.vercel.app",
+  },
+  {
+    title: "og-checker",
+    slug: "og-checker",
+    description: "Preview and audit Open Graph tags — Twitter, Facebook, LinkedIn",
+    longDescription:
+      "Paste any URL and see pixel-faithful previews of how your link looks on Twitter/X, Facebook, and LinkedIn — plus a scored OG audit checklist and a full raw meta tags table. Server-side fetching bypasses CORS and resolves relative image URLs.",
+    image: "/images/og-checker.png",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+    video: undefined,
+    url: "https://og-checker.vercel.app",
+  },
 ];
