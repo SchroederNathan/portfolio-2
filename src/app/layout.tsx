@@ -81,29 +81,52 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Preconnect to Apple CDN used for music card album artwork */}
+        <link rel="preconnect" href="https://is1-ssl.mzstatic.com" />
+        <link rel="dns-prefetch" href="https://is1-ssl.mzstatic.com" />
+      </head>
       <body className={`${satoshi.variable} ${exposure.variable}`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Nathan Schroeder",
-              url: "https://nathanschroeder.dev",
-              jobTitle: "Software Developer",
-              knowsAbout: [
-                "React Native",
-                "Next.js",
-                "UI/UX Design",
-                "TypeScript",
-              ],
-              sameAs: [
-                "https://github.com/SchroederNathan",
-                "https://www.linkedin.com/in/nathan-schroeder-a40aa2210/",
-                "https://x.com/nater02",
-                "https://www.instagram.com/nathanschroederr/",
-              ],
-            }),
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Person",
+                name: "Nathan Schroeder",
+                url: "https://nathanschroeder.dev",
+                jobTitle: "Software Developer & UI/UX Designer",
+                description:
+                  "Software developer and UI/UX designer specializing in React Native and Next.js. Building apps like Movati (130K+ users), FocusGrid, and ThemeGen.",
+                knowsAbout: [
+                  "React Native",
+                  "Next.js",
+                  "UI/UX Design",
+                  "TypeScript",
+                  "Laravel",
+                  "Tailwind CSS",
+                ],
+                sameAs: [
+                  "https://github.com/SchroederNathan",
+                  "https://www.linkedin.com/in/nathan-schroeder-a40aa2210/",
+                  "https://x.com/nater02",
+                  "https://www.instagram.com/nathanschroederr/",
+                ],
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "Nathan Schroeder",
+                url: "https://nathanschroeder.dev",
+                description:
+                  "Portfolio of Nathan Schroeder — software developer and UI/UX designer.",
+                author: {
+                  "@type": "Person",
+                  name: "Nathan Schroeder",
+                },
+              },
+            ]),
           }}
         />
         <ThemeProvider

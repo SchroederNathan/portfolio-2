@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: "https://nathanschroeder.dev", lastModified: new Date() },
     { url: "https://nathanschroeder.dev/projects", lastModified: new Date() },
+    { url: "https://nathanschroeder.dev/playground", lastModified: new Date() },
     ...projectUrls,
     ...playgroundUrls,
   ];

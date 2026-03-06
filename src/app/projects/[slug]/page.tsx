@@ -28,6 +28,20 @@ export async function generateMetadata({
     openGraph: {
       title: `${project.title} — Nathan Schroeder`,
       description: project.description,
+      url: `https://nathanschroeder.dev/projects/${project.slug}`,
+      images: [
+        {
+          url: project.image,
+          width: 1200,
+          height: 630,
+          alt: `${project.title} — ${project.description}`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} — Nathan Schroeder`,
+      description: project.description,
       images: [project.image],
     },
   };
@@ -184,6 +198,7 @@ export default async function ProjectDetailPage({
                 src={project.image}
                 alt={`Screenshot of ${project.title} — ${project.description}`}
                 fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 672px, 768px"
                 className="object-cover object-top"
                 priority
               />

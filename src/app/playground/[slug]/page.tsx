@@ -20,6 +20,25 @@ export async function generateMetadata({
   return {
     title: item.title,
     description: item.description,
+    openGraph: {
+      title: `${item.title} — Nathan Schroeder`,
+      description: item.description,
+      url: `https://nathanschroeder.dev/playground/${item.slug}`,
+      images: [
+        {
+          url: item.image,
+          width: 640,
+          height: 336,
+          alt: item.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${item.title} — Nathan Schroeder`,
+      description: item.description,
+      images: [item.image],
+    },
   };
 }
 

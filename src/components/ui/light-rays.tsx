@@ -202,7 +202,18 @@ const LightRays: React.FC<LightRaysProps> = ({
     const initializeWebGL = async () => {
       if (!containerRef.current) return;
 
-      await new Promise((resolve) => setTimeout(resolve, 10));
+      // Defer WebGL initialization until the browser is idle (after LCP/TTI)
+      // to avoid blocking the main thread during initial page load.
+      await new Promise<void>((resolve) => {
+        if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+          (window as Window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => void }).requestIdleCallback(
+            () => resolve(),
+            { timeout: 2000 }
+          );
+        } else {
+          setTimeout(resolve, 500);
+        }
+      });
 
       if (!containerRef.current) return;
 
