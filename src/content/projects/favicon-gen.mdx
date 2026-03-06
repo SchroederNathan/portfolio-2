@@ -1,0 +1,46 @@
+## Overview
+
+favicon-gen is a browser-based favicon generator that turns any image, emoji, or solid color into a complete favicon set in seconds. No backend, no file uploads to a server, no accounts required — everything runs in the browser using the Canvas API.
+
+It's live at [favicon-gen.vercel.app](https://favicon-gen.vercel.app) and completely free.
+
+## The Problem
+
+Getting a proper favicon set for a web project is weirdly annoying:
+
+- You need 7 different sizes (16×16 up to 512×512) for full browser and PWA coverage
+- You need a `manifest.json` with all the icons listed for progressive web apps
+- You need specific `<link>` tags for the HTML head — and getting the syntax right from memory is error-prone
+- Most "favicon generators" require email signup or upload your image to their server
+
+The result: most projects ship with a single 32px favicon and broken manifest files, or skip favicons altogether on side projects because it's not worth the setup time.
+
+## The Solution
+
+favicon-gen solves this with three input modes and zero friction:
+
+**Upload Mode** — Drag and drop or click to upload any PNG/JPG/SVG. The image is drawn onto canvas elements at each target size with `drawImage`.
+
+**Emoji / Text Mode** — Type any emoji or short text, pick foreground and background colors, and the canvas renders it as an icon. Works great for quick side-project branding.
+
+**Solid Color Mode** — Pick from 12 prebuilt swatches for one-click placeholder icons.
+
+All output is generated client-side using the HTML5 Canvas API. No image data ever leaves the browser.
+
+## Key Features
+
+- **7 output sizes** — 16, 32, 48, 64, 128, 192, 512px, matching all browser tab, bookmark, home screen, and app store icon requirements
+- **Rounded corners** — Applied automatically at sizes ≥ 64px using a canvas `arc` clip path for an Apple-style icon look
+- **Individual PNG downloads** — Click any size preview to download just that file
+- **Download All as ZIP** — Packages all 7 PNGs, a ready-to-paste HTML `<link>` snippet, and a PWA `manifest.json` into a single ZIP via the `fflate` library
+- **Copy snippets** — One-click copy for both the HTML `<link>` tags and the `manifest.json` content
+- **App name field** — Drives the `name` and `short_name` fields in the generated manifest
+- **Size reference table** — Labels each size with its purpose (Browser tab, Toolbar icon, App store listing, etc.)
+
+## Technical Highlights
+
+The core rendering lives in `lib/favicon-utils.ts` — a single utility file that handles all canvas drawing, ZIP packaging, and code generation. This keeps the page component (`app/page.tsx`) as pure UI logic, with no rendering knowledge baked in.
+
+Rounded corners are implemented by calling `ctx.beginPath()` with a sequence of `arc` calls tracing the four rounded corners before `ctx.clip()`. This avoids any CSS border-radius (which doesn't affect canvas output) and produces actual pixel-accurate rounded corners in the PNG output.
+
+ZIP creation uses `fflate`'s `zipSync` to bundle all files in memory, then a `Blob` URL triggers the download — no server round-trip, no temporary files. The manifest includes `theme_color` from the background color picker, proper icon size entries for all 7 sizes, and `display: standalone` for PWA installability.

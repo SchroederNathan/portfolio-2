@@ -1,0 +1,44 @@
+## Overview
+
+og-checker is a developer tool that lets you paste any URL and instantly see how your link will look when shared on Twitter/X, Facebook, and LinkedIn — plus a scored OG audit that tells you exactly what's missing and what to fix.
+
+It's live at [og-checker.vercel.app](https://og-checker.vercel.app) and completely free.
+
+## The Problem
+
+Open Graph tags are invisible when you're writing them. You can't see how your `og:image` will be cropped on Twitter vs. Facebook until you post the link, by which point your followers have already seen the ugly fallback. The feedback loop is terrible:
+
+- Edit your `index.html` or Next.js metadata
+- Deploy to production (or staging)
+- Paste the URL into Twitter's Card Validator or Facebook's Debugger
+- Wait for the cache to clear (Facebook's can take hours)
+- Repeat
+
+Developers also routinely ship pages missing `og:description`, using the wrong `twitter:card` type, or with images that don't meet minimum size requirements — all invisible until something embarrassing happens.
+
+## The Solution
+
+og-checker fetches your page server-side (bypassing CORS), parses all the relevant meta tags, and renders accurate previews of all three platforms in one view — with a scored audit so you know exactly what to fix.
+
+The server-side `app/api/og/route.ts` API route handles:
+- Fetching the URL with an 8-second timeout and automatic redirect following
+- Reading up to 500KB of the HTML response, stopping early after `</head>` for speed
+- Parsing with `node-html-parser` for fast, robust tag extraction
+- Resolving all relative image URLs to absolute using the page's base URL
+
+## Key Features
+
+- **3 social previews** — Pixel-faithful reproductions of the Twitter/X large card and summary card, Facebook link preview (white card, blue header strip), and LinkedIn post preview (gray `f3f2ef` background)
+- **Platform tabs** — View all three side-by-side or focus on one
+- **OG Audit Score** — A circular gauge (0–100%) and an itemized checklist of 9 tags (critical: `og:title`, `og:description`, `og:image`, `og:url`; optional: `og:type`, `og:site_name`, `twitter:card`, `twitter:image`, `meta description`)
+  - Green ≥ 80%, amber ≥ 50%, red below 50%
+- **Raw Meta Tags table** — Every extracted tag with its value, a ✓/✗ presence indicator, and a copy button
+- **Example URLs** — Vercel, GitHub, Stripe, and Linear pre-loaded as quick demos
+
+## Technical Highlights
+
+The preview card components are hand-built HTML/CSS reproductions of each platform's actual sharing UI — not screenshots. This makes them instantly accurate for any URL without requiring browser automation or headless Chrome.
+
+The `twitter:card` type controls which Twitter layout renders: `summary_large_image` shows the wide image-on-top card while `summary` shows the compact side thumbnail. Both layouts are implemented and switch automatically based on the parsed tag value.
+
+The audit score uses a weighted system — critical tags count for more points than optional ones — so the score meaningfully reflects real sharing quality rather than just tag count. The circular progress gauge is a pure SVG `stroke-dasharray` animation with no external chart library.
