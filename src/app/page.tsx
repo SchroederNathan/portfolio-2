@@ -1,3 +1,4 @@
+import CaseStudiesContainer from "@/components/case-studies/container";
 import ExperienceContainer from "@/components/experience/container";
 import HeroSection from "@/components/hero-section";
 import MusicCard from "@/components/music-card";
@@ -10,6 +11,9 @@ export default function Home() {
     <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-3xl sm:py-32 py-16 lg:pb-40">
         <HeroSection />
+        <Reveal delay={0.3}>
+          <CaseStudiesContainer />
+        </Reveal>
         <Reveal delay={0.35}>
           <ProjectsContainer />
         </Reveal>
