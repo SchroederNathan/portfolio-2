@@ -10,8 +10,8 @@ const experiences: Experience[] = [
     startDate: new Date("2025-04-01"),
     description: (
       <>
-        I spend of my time designing, building, and maintaining mobile apps in React
-        Native SwiftUl, and Java with products that reached over{" "}
+        I spend most of my time designing, building, and maintaining mobile apps in React
+        Native, SwiftUI, and Java with products that reached over{" "}
         <span
           className="italic font-exposure text-foreground"
           style={{ fontFamily: "Exposure-30" }}
@@ -19,8 +19,8 @@ const experiences: Experience[] = [
           130k monthly active users
         </span>
         . I also work on several web applications using React and Laravel. Besides
-        development, I helped shape parts of our Devops worklow, setting up servers,
-        managing CI/CU pipelines. and working with AWS
+        development, I helped shape parts of our DevOps workflow, setting up servers,
+        managing CI/CD pipelines, and working with AWS
       </>
     ),
     url: "https://redpiston.com/",

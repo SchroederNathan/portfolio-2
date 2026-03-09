@@ -75,7 +75,7 @@ export default function HeroSection() {
       </Reveal>
       <Reveal delay={0.3}>
         <p className="text-lg text-muted mb-8">
-          I build cool stuff that actually feels good to use whether its a
+          I build cool stuff that actually feels good to use whether it's a
           personal/internal tool or a large-scale application. I care about
           the details.{" "}
           <span
@@ -84,7 +84,7 @@ export default function HeroSection() {
           >
             elegant
           </span>{" "}
-          Ul,{" "}
+          UI,{" "}
           <span
             className="italic font-exposure text-foreground"
             style={{ fontFamily: "Exposure-30" }}
