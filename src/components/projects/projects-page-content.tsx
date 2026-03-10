@@ -4,11 +4,63 @@ import { projects } from "@/data/projects";
 import { ArrowUpRightIcon, LinkIcon } from "@/components/ui/svg-icons";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
-import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { useState, useMemo, useCallback } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import TechFilter from "./tech-filter";
+
+// Collect all unique tags across projects
+const allTags = Array.from(
+  new Set(projects.flatMap((p) => p.tags))
+).sort();
 
 export default function ProjectsPageContent() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  // Derive selected tags from URL
+  const selectedTags = useMemo(() => {
+    const param = searchParams.get("stack");
+    if (!param) return [];
+    return param.split(",").filter((t) => allTags.includes(t));
+  }, [searchParams]);
+
+  // Filter projects: AND logic — must match ALL selected tags
+  const filteredProjects = useMemo(() => {
+    if (selectedTags.length === 0) return projects;
+    return projects.filter((p) =>
+      selectedTags.every((tag) => p.tags.includes(tag))
+    );
+  }, [selectedTags]);
+
+  const updateURL = useCallback(
+    (tags: string[]) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (tags.length === 0) {
+        params.delete("stack");
+      } else {
+        params.set("stack", tags.join(","));
+      }
+      const qs = params.toString();
+      router.replace(`/projects${qs ? `?${qs}` : ""}`, { scroll: false });
+    },
+    [searchParams, router]
+  );
+
+  const handleToggleTag = useCallback(
+    (tag: string) => {
+      const next = selectedTags.includes(tag)
+        ? selectedTags.filter((t) => t !== tag)
+        : [...selectedTags, tag];
+      updateURL(next);
+    },
+    [selectedTags, updateURL]
+  );
+
+  const handleClear = useCallback(() => {
+    updateURL([]);
+  }, [updateURL]);
 
   return (
     <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -37,15 +89,30 @@ export default function ProjectsPageContent() {
           <h1 className="text-foreground font-bold text-xl">All Projects</h1>
         </Link>
 
+        <TechFilter
+          allTags={allTags}
+          selectedTags={selectedTags}
+          onToggleTag={handleToggleTag}
+          onClear={handleClear}
+        />
+
         <div className="flex flex-col gap-8">
-          {projects.map((project, index) => {
+          <AnimatePresence mode="popLayout">
+          {filteredProjects.map((project, index) => {
             const isHovered = hoveredIndex === index;
             const isAnyHovered = hoveredIndex !== null;
             const cardOpacity = isAnyHovered && !isHovered ? 0.5 : 1;
 
             return (
+              <motion.div
+                key={project.slug}
+                layout
+                initial={{ opacity: 0, scale: 0.97 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.97 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+              >
               <Link
-                key={project.title}
                 href={`/projects/${project.slug}`}
               >
                 <motion.div
@@ -143,8 +210,10 @@ export default function ProjectsPageContent() {
                   </div>
                 </motion.div>
               </Link>
+              </motion.div>
             );
           })}
+          </AnimatePresence>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import ProjectsPageContent from "@/components/projects/projects-page-content";
 
 export const metadata: Metadata = {
@@ -8,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectsPage() {
-  return <ProjectsPageContent />;
+  return (
+    <Suspense>
+      <ProjectsPageContent />
+    </Suspense>
+  );
 }
