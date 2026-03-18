@@ -135,7 +135,7 @@ export default async function ProjectDetailPage({
             href="/projects"
             className="group flex items-center gap-3 mb-12"
           >
-            <div className="text-muted group-hover:text-foreground transition-colors duration-200">
+            <div className="text-muted group-hover:text-foreground transition-colors duration-200 -ms-1">
               <svg
                 width="20"
                 height="20"
@@ -151,10 +151,9 @@ export default async function ProjectDetailPage({
                   strokeLinejoin="round"
                 />
               </svg>
-            </div>
-            <span className="text-muted group-hover:text-foreground transition-colors duration-200 text-sm">
-              All Projects
-            </span>
+              </div>
+              <h1 className="text-foreground font-bold text-xl">All Projects</h1>
+
           </Link>
         </Reveal>
 
