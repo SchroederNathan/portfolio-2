@@ -152,7 +152,7 @@ export default async function ProjectDetailPage({
                 />
               </svg>
               </div>
-              <h1 className="text-foreground font-bold text-xl">All Projects</h1>
+              <h1 className="text-foreground font-bold text-xl">Back</h1>
 
           </Link>
         </Reveal>

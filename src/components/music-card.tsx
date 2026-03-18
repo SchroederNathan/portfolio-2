@@ -358,9 +358,9 @@ const MusicCard = ({ trackId, search, spotifyTopTrack }: MusicCardProps) => {
   return (
     <div className="group/music mb-8" id="music-card">
       {spotifyTopTrack && (
-        <div className="flex items-center gap-2 mb-3 text-muted">
-          <SpotifyIcon size={16} />
-          <span className="text-sm mb-1">what i'm playing</span>
+        <div className="flex items-center gap-2 mb-6 text-muted">
+          <SpotifyIcon size={20} />
+          <span className="text-sm leading-0 ">top played track this month</span>
         </div>
       )}
       <div className="flex flex-row items-center gap-4 relative pb-1 transition-all ">
