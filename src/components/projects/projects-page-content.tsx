@@ -121,9 +121,12 @@ export default function ProjectsPageContent() {
                       )}
                     </div>
 
-                    {/* Right: External link */}
-                    {project.url && (
-                      <div className="flex items-center sm:items-start shrink-0">
+                    {/* Right: Case study + external link */}
+                    <div className="flex flex-col items-start gap-3 shrink-0 sm:items-end">
+                      <span className="text-xs font-medium uppercase tracking-[0.18em] text-primary">
+                        Read case study
+                      </span>
+                      {project.url && (
                         <button
                           type="button"
                           onClick={(e) => {
@@ -138,8 +141,8 @@ export default function ProjectsPageContent() {
                           </span>
                           <LinkIcon size={14} className="text-muted shrink-0" />
                         </button>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               </Link>

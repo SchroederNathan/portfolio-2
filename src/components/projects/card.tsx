@@ -110,29 +110,35 @@ const ProjectCard = ({
             </div>
           </div>
 
-          {/* URL bar - external link with stopPropagation */}
-          {project.url && (
-            <motion.div
-              role="link"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                window.open(project.url, "_blank", "noopener,noreferrer");
-              }}
-              className="flex items-center justify-between gap-2 pt-3 cursor-pointer"
-              animate={{
-                opacity: isHovered ? 1 : 0,
-                filter: isHovered ? "blur(0px)" : "blur(4px)",
-                y: isHovered ? 0 : -8,
-              }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <span className="text-xs text-muted truncate flex-1">
-                {project.url}
-              </span>
-              <LinkIcon size={14} className="text-muted shrink-0" />
-            </motion.div>
-          )}
+          <div className="flex items-center justify-between gap-3 pt-3">
+            <span className="text-xs font-medium uppercase tracking-[0.18em] text-primary">
+              Read case study
+            </span>
+
+            {/* URL bar - external link with stopPropagation */}
+            {project.url && (
+              <motion.div
+                role="link"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  window.open(project.url, "_blank", "noopener,noreferrer");
+                }}
+                className="flex items-center gap-2 cursor-pointer"
+                animate={{
+                  opacity: isHovered ? 1 : 0.65,
+                  filter: isHovered ? "blur(0px)" : "blur(0px)",
+                  y: 0,
+                }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                <span className="text-xs text-muted truncate max-w-[180px]">
+                  {project.url.replace(/^https?:\/\//, "")}
+                </span>
+                <LinkIcon size={14} className="text-muted shrink-0" />
+              </motion.div>
+            )}
+          </div>
         </div>
       </motion.div>
     </Link>
