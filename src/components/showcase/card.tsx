@@ -40,7 +40,7 @@ const ShowcaseCard = ({
 
   return (
     <motion.div
-      className="group relative flex w-[320px] shrink-0 flex-col"
+      className="group relative flex w-[320px] shrink-0 flex-col cursor-default"
       onMouseEnter={() => onHoverChange(true)}
       onMouseLeave={() => onHoverChange(false)}
       animate={{ opacity: cardOpacity }}
