@@ -8,6 +8,8 @@ interface ShowcaseCardProps {
   item: ShowcaseItem;
   isHovered: boolean;
   isAnyHovered: boolean;
+  shouldPlay: boolean;
+  isTouchDevice: boolean;
   onHoverChange: (hovered: boolean) => void;
 }
 
@@ -15,10 +17,12 @@ const ShowcaseCard = ({
   item,
   isHovered,
   isAnyHovered,
+  shouldPlay,
+  isTouchDevice,
   onHoverChange,
 }: ShowcaseCardProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const cardOpacity = isAnyHovered && !isHovered ? 0.5 : 1;
+  const cardOpacity = isTouchDevice ? 1 : isAnyHovered && !isHovered ? 0.5 : 1;
 
   useEffect(() => {
     const video = videoRef.current;
@@ -27,7 +31,7 @@ const ShowcaseCard = ({
       return;
     }
 
-    if (isHovered) {
+    if (shouldPlay) {
       video.currentTime = 0;
       const playPromise = video.play();
       playPromise?.catch(() => {});
@@ -36,13 +40,22 @@ const ShowcaseCard = ({
 
     video.pause();
     video.currentTime = 0;
-  }, [isHovered]);
+  }, [shouldPlay]);
 
   return (
     <motion.div
       className="group relative flex w-[320px] shrink-0 flex-col cursor-default"
-      onMouseEnter={() => onHoverChange(true)}
-      onMouseLeave={() => onHoverChange(false)}
+      data-showcase-slug={item.slug}
+      onMouseEnter={() => {
+        if (!isTouchDevice) {
+          onHoverChange(true);
+        }
+      }}
+      onMouseLeave={() => {
+        if (!isTouchDevice) {
+          onHoverChange(false);
+        }
+      }}
       animate={{ opacity: cardOpacity }}
       transition={{ duration: 0.2, ease: "easeOut" }}
     >
@@ -90,7 +103,7 @@ const ShowcaseCard = ({
 
             <motion.div
               className="pointer-events-none absolute inset-0 bg-black/10"
-              animate={{ opacity: isHovered ? 0 : 1 }}
+              animate={{ opacity: shouldPlay ? 0 : 1 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             />
           </div>
