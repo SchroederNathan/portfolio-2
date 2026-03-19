@@ -1,8 +1,8 @@
 import ExperienceContainer from "@/components/experience/container";
 import HeroSection from "@/components/hero-section";
 import MusicCard from "@/components/music-card";
-import PlaygroundContainer from "@/components/playground/container";
 import ProjectsContainer from "@/components/projects/container";
+import ShowcaseContainer from "@/components/showcase/container";
 import Reveal from "@/components/ui/reveal";
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
           <ProjectsContainer />
         </Reveal>
         <Reveal delay={0.375}>
-          <PlaygroundContainer />
+          <ShowcaseContainer />
         </Reveal>
         <Reveal delay={0.4}>
           <ExperienceContainer />
