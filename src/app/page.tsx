@@ -3,13 +3,15 @@ import HeroSection from "@/components/hero-section";
 import MusicCard from "@/components/music-card";
 import PlaygroundContainer from "@/components/playground/container";
 import ProjectsContainer from "@/components/projects/container";
+import RecruiterProofStrip from "@/components/recruiter-proof-strip";
 import Reveal from "@/components/ui/reveal";
 
 export default function Home() {
   return (
     <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-3xl sm:py-32 py-16 lg:pb-40">
+      <div className="mx-auto max-w-3xl py-16 sm:py-32 lg:pb-40">
         <HeroSection />
+        <RecruiterProofStrip />
         <Reveal delay={0.35}>
           <ProjectsContainer />
         </Reveal>
