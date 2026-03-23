@@ -1,0 +1,29 @@
+## Overview
+
+React Native Motion is an open-source animation library and documentation site I built for React Native developers. It provides production-ready animations with detailed guides for you or your AI agents to use in your apps.
+
+The goal: make it easy for developers (and their AI agents) to ship beautiful, performant animations without relying on external libraries.
+
+## The Challenge
+
+Implementing polished animations in React Native is hard. Developers spend hours piecing together shared values, worklets, and gesture compositions.
+
+- Bridge the gap between Reanimated docs and real-world animation patterns
+- Provide production-ready implementations that developers or their AI agents can drop into their apps
+- Explain the "how" and "why" behind each animation, not just the code
+
+## The Solution
+
+I built a **Next.js** site at [rnmotion.dev](https://rnmotion.dev) with MDX-powered guides for each animation. Every pattern ships with a video demo, full source code, a step-by-step breakdown, and a common pitfalls section so developers don't hit the same walls I did.
+
+## Key Features
+
+- **Copy-Paste Ready** — Every animation is self-contained and ready to drop into any React Native project.
+- **LLM Ready** — Every animation has a **Copy Prompt** button that you can use in your favourite AI agent.
+- **Deep Explanations** — Each guide breaks down the animation step by step, covering shared values, interpolation, gesture composition, and other performance considerations.
+
+## Technical Highlights
+
+The documentation site is built with Next.js, TypeScript, and Tailwind CSS. Animation pages use MDX with custom components for code highlighting and video previews.
+
+Each animation pattern demonstrates advanced Reanimated techniques — shared value interpolation, simultaneous gesture handlers, worklet-based spring physics, and GPU-optimized transforms — all packaged into clean, reusable implementations.

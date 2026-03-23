@@ -11,6 +11,17 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: "React Native Motion",
+    slug: "rnmotion",
+    description: "Beautiful animation library for React Native",
+    longDescription:
+      "A comprehensive animation library and documentation site for React Native and Expo developers. Features production-ready animation patterns like gallery stack carousels and radial menus, with detailed implementation guides, live video previews, and copy-paste ready code.",
+    image: "/images/rnmotion.png",
+    tags: ["React Native", "Next.js", "MDX"],
+    video: undefined,
+    url: "https://rnmotion.dev",
+  },
+  {
     title: "Movati",
     slug: "movati",
     description: "Class booking and account management app",
@@ -21,6 +32,7 @@ export const projects: Project[] = [
     video: undefined,
     url: "https://movatiathletic.com",
   },
+
   {
     title: "FocusGrid",
     slug: "focusgrid",
@@ -32,17 +44,7 @@ export const projects: Project[] = [
     video: undefined,
     url: "https://focusgridapp.com",
   },
-  // {
-  //   title: "Medley",
-  //   slug: "medley",
-  //   description: "A media tracking and recommendation app",
-  //   longDescription:
-  //     "A personal media tracking application that helps users catalog and discover movies, TV shows, books, and music. Features intelligent recommendations based on user preferences and a clean interface for managing your media library.",
-  //   image: "/images/medley.jpg",
-  //   tags: ["React Native", "Expo", "PostgreSQL"],
-  //   video: undefined,
-  //   url: "https://medley.app",
-  // },
+
   {
     title: "ThemeGen",
     slug: "themegen",
@@ -54,5 +56,4 @@ export const projects: Project[] = [
     video: undefined,
     url: "https://themegen.dev",
   },
-
 ];
