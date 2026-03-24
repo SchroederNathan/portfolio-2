@@ -4,6 +4,7 @@ import MusicCard from "@/components/music-card";
 import PlaygroundContainer from "@/components/playground/container";
 import ProjectsContainer from "@/components/projects/container";
 import RecruiterProofStrip from "@/components/recruiter-proof-strip";
+import ResumeAvailabilityCta from "@/components/resume-availability-cta";
 import Reveal from "@/components/ui/reveal";
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
         <Reveal delay={0.4}>
           <ExperienceContainer />
         </Reveal>
+        <ResumeAvailabilityCta />
         <Reveal delay={0.45}>
           <MusicCard spotifyTopTrack />
         </Reveal>
