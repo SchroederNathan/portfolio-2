@@ -1,14 +1,25 @@
 "use client";
 
-import { projects } from "@/data/projects";
+import { projects, type ProjectCategory } from "@/data/projects";
+import FilterTags from "@/components/projects/filter-tags";
 import { ArrowUpRightIcon, LinkIcon } from "@/components/ui/svg-icons";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
-import { useState } from "react";
+import { AnimatePresence, LayoutGroup, motion } from "motion/react";
+import { useState, useMemo } from "react";
 
 export default function ProjectsPageContent() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [selectedCategory, setSelectedCategory] =
+    useState<ProjectCategory | null>(null);
+
+  const filteredProjects = useMemo(
+    () =>
+      selectedCategory
+        ? projects.filter((p) => p.categories.includes(selectedCategory))
+        : projects,
+    [selectedCategory]
+  );
 
   return (
     <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -37,115 +48,132 @@ export default function ProjectsPageContent() {
           <h1 className="text-foreground font-bold text-xl">All Projects</h1>
         </Link>
 
-        <div className="flex flex-col gap-8">
-          {projects.map((project, index) => {
-            const isHovered = hoveredIndex === index;
-            const isAnyHovered = hoveredIndex !== null;
-            const cardOpacity = isAnyHovered && !isHovered ? 0.5 : 1;
+        <div className="mb-6">
+          <FilterTags
+            selected={selectedCategory}
+            onChange={setSelectedCategory}
+          />
+        </div>
 
-            return (
-              <Link
-                key={project.title}
-                href={`/projects/${project.slug}`}
-              >
-                <motion.div
-                  className="group relative"
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                  animate={{ opacity: cardOpacity }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                >
-                  {/* Card background with hover effect */}
+        <LayoutGroup>
+          <div className="flex flex-col gap-8">
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project, index) => {
+                const isHovered = hoveredIndex === index;
+                const isAnyHovered = hoveredIndex !== null;
+                const cardOpacity = isAnyHovered && !isHovered ? 0.5 : 1;
+
+                return (
                   <motion.div
-                    className="absolute -inset-4 z-0 hidden rounded-xl lg:block bg-foreground/5 shadow-[inset_0_1px_0.25px_0.25px_rgba(255,255,255,0.1)] drop-shadow-lg"
-                    initial={{ scale: 0.98, opacity: 0 }}
-                    animate={{
-                      scale: isHovered ? 1 : 0.98,
-                      opacity: isHovered ? 1 : 0,
-                    }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                  />
-
-                  {/* Content */}
-                  <div className="relative z-10 flex flex-col sm:flex-row gap-4 sm:gap-6">
-                    {/* Left: Image */}
-                    <div className="relative sm:w-40 shrink-0 self-start">
-                      <div
-                        className="relative w-full rounded-lg bg-foreground/5 shadow-[inset_0_1px_0.25px_0.25px_rgba(255,255,255,0.05)] drop-shadow-lg p-px overflow-hidden aspect-video"
+                    key={project.slug}
+                    layout
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                  >
+                    <Link href={`/projects/${project.slug}`}>
+                      <motion.div
+                        className="group relative"
+                        onMouseEnter={() => setHoveredIndex(index)}
+                        onMouseLeave={() => setHoveredIndex(null)}
+                        animate={{ opacity: cardOpacity }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
                       >
-                        <div className="relative w-full h-full rounded-lg overflow-hidden">
-                          <Image
-                            src={project.image}
-                            alt={`Screenshot of ${project.title} — ${project.description}`}
-                            fill
-                            className="object-cover object-top"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Middle: Title, Description, Tags */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-2">
-                        <h2 className="text-lg text-foreground font-medium">
-                          {project.title}
-                        </h2>
-                        <motion.span
-                          className="-mb-4 text-muted group-hover:text-foreground transition-colors duration-200"
+                        {/* Card background with hover effect */}
+                        <motion.div
+                          className="absolute -inset-4 z-0 hidden rounded-xl lg:block bg-foreground/5 shadow-[inset_0_1px_0.25px_0.25px_rgba(255,255,255,0.1)] drop-shadow-lg"
+                          initial={{ scale: 0.98, opacity: 0 }}
                           animate={{
-                            x: isHovered ? 4 : 0,
-                            y: isHovered ? -4 : 0,
+                            scale: isHovered ? 1 : 0.98,
+                            opacity: isHovered ? 1 : 0,
                           }}
                           transition={{ duration: 0.2, ease: "easeOut" }}
-                        >
-                          <ArrowUpRightIcon size={14} />
-                        </motion.span>
-                      </div>
+                        />
 
-                      <p className="text-muted text-sm mb-3">
-                        {project.longDescription || project.description}
-                      </p>
-
-                      {/* Tags */}
-                      {project.tags && project.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-2 mb-3 sm:mb-0">
-                          {project.tags.map((tag, tagIndex) => (
-                            <span
-                              key={tagIndex}
-                              className="px-2 py-1 text-xs text-muted rounded-lg bg-foreground/5 shadow-[inset_0_1px_0.25px_0.25px_rgba(255,255,255,0.1)] drop-shadow-lg"
+                        {/* Content */}
+                        <div className="relative z-10 flex flex-col sm:flex-row gap-4 sm:gap-6">
+                          {/* Left: Image */}
+                          <div className="relative sm:w-40 shrink-0 self-start">
+                            <div
+                              className="relative w-full rounded-lg bg-foreground/5 shadow-[inset_0_1px_0.25px_0.25px_rgba(255,255,255,0.05)] drop-shadow-lg p-px overflow-hidden aspect-video"
                             >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
+                              <div className="relative w-full h-full rounded-lg overflow-hidden">
+                                <Image
+                                  src={project.image}
+                                  alt={`Screenshot of ${project.title} — ${project.description}`}
+                                  fill
+                                  className="object-cover object-top"
+                                />
+                              </div>
+                            </div>
+                          </div>
 
-                    {/* Right: External link */}
-                    {project.url && (
-                      <div className="flex items-center sm:items-start shrink-0">
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            window.open(project.url, "_blank", "noopener,noreferrer");
-                          }}
-                          className="flex items-center gap-2 hover:text-foreground transition-colors duration-200 cursor-pointer"
-                        >
-                          <span className="text-xs text-muted truncate max-w-[120px] sm:max-w-[150px]">
-                            {project.url.replace(/^https?:\/\//, "")}
-                          </span>
-                          <LinkIcon size={14} className="text-muted shrink-0" />
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                </motion.div>
-              </Link>
-            );
-          })}
-        </div>
+                          {/* Middle: Title, Description, Tags */}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-2">
+                              <h2 className="text-lg text-foreground font-medium">
+                                {project.title}
+                              </h2>
+                              <motion.span
+                                className="-mb-4 text-muted group-hover:text-foreground transition-colors duration-200"
+                                animate={{
+                                  x: isHovered ? 4 : 0,
+                                  y: isHovered ? -4 : 0,
+                                }}
+                                transition={{ duration: 0.2, ease: "easeOut" }}
+                              >
+                                <ArrowUpRightIcon size={14} />
+                              </motion.span>
+                            </div>
+
+                            <p className="text-muted text-sm mb-3">
+                              {project.longDescription || project.description}
+                            </p>
+
+                            {/* Tags */}
+                            {project.tags && project.tags.length > 0 && (
+                              <div className="flex flex-wrap gap-2 mb-3 sm:mb-0">
+                                {project.tags.map((tag, tagIndex) => (
+                                  <span
+                                    key={tagIndex}
+                                    className="px-2 py-1 text-xs text-muted rounded-lg bg-foreground/5 shadow-[inset_0_1px_0.25px_0.25px_rgba(255,255,255,0.1)] drop-shadow-lg"
+                                  >
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Right: External link */}
+                          {project.url && (
+                            <div className="flex items-center sm:items-start shrink-0">
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  window.open(project.url, "_blank", "noopener,noreferrer");
+                                }}
+                                className="flex items-center gap-2 hover:text-foreground transition-colors duration-200 cursor-pointer"
+                              >
+                                <span className="text-xs text-muted truncate max-w-[120px] sm:max-w-[150px]">
+                                  {project.url.replace(/^https?:\/\//, "")}
+                                </span>
+                                <LinkIcon size={14} className="text-muted shrink-0" />
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      </motion.div>
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </div>
+        </LayoutGroup>
       </div>
     </div>
   );
