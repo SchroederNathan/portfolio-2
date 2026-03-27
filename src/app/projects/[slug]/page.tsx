@@ -189,6 +189,38 @@ export default async function ProjectDetailPage({
           </Reveal>
         )}
 
+        {project.proof && (
+          <Reveal delay={0.28}>
+            <div className="grid gap-3 mb-8 sm:grid-cols-3">
+              <div className="rounded-xl border border-white/10 bg-foreground/5 p-4">
+                <p className="text-[11px] uppercase tracking-[0.2em] text-muted">Role</p>
+                <p className="mt-2 text-sm text-foreground">{project.proof.role}</p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-foreground/5 p-4">
+                <p className="text-[11px] uppercase tracking-[0.2em] text-muted">Timeline</p>
+                <p className="mt-2 text-sm text-foreground">{project.proof.timeline}</p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-foreground/5 p-4">
+                <p className="text-[11px] uppercase tracking-[0.2em] text-muted">Outcome</p>
+                <p className="mt-2 text-sm text-foreground">{project.proof.impact}</p>
+              </div>
+            </div>
+          </Reveal>
+        )}
+
+        {project.metrics && project.metrics.length > 0 && (
+          <Reveal delay={0.29}>
+            <div className="grid gap-3 mb-8 sm:grid-cols-3">
+              {project.metrics.map((metric) => (
+                <div key={metric.label} className="rounded-xl border border-white/10 bg-black/20 p-4">
+                  <p className="text-[11px] uppercase tracking-[0.2em] text-muted">{metric.label}</p>
+                  <p className="mt-2 text-base font-medium text-foreground">{metric.value}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        )}
+
         {/* Hero image */}
         <Reveal delay={0.3}>
           <div className="relative w-full rounded-lg bg-foreground/5 shadow-[inset_0_1px_0.25px_0.25px_rgba(255,255,255,0.05)] drop-shadow-lg p-px mb-12 overflow-hidden aspect-video">
