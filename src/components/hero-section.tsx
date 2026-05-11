@@ -16,7 +16,7 @@ export default function HeroSection() {
         <div className="flex flex-row justify-between gap-3 mb-3">
           <h1
             className="text-4xl font-black"
-            style={{ fontFamily: "Exposure-100" }}
+            style={{ fontFamily: "Exposure-60" }}
           >
             hey, I<span className="font-sans">&apos;</span>m Nate
           </h1>
