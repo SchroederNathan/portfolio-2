@@ -15,10 +15,10 @@ export default function HeroSection() {
       <Reveal delay={0}>
         <div className="flex flex-row justify-between gap-3 mb-3">
           <h1
-            className="text-4xl font-exposure font-black"
-            style={{ fontVariationSettings: "'wght' 1000, 'opsz' -30" }}
+            className="text-4xl font-black"
+            style={{ fontFamily: "Exposure-100" }}
           >
-            hey, I&apos;m Nate
+            hey, I<span className="font-sans">&apos;</span>m Nate
           </h1>
           <ThemeToggle />
         </div>
