@@ -94,6 +94,13 @@ export default function RootLayout({
         {/* Preconnect to Apple CDN used for music card album artwork */}
         <link rel="preconnect" href="https://is1-ssl.mzstatic.com" />
         <link rel="dns-prefetch" href="https://is1-ssl.mzstatic.com" />
+        <link
+          rel="preload"
+          href="/fonts/exposure/ExposureTrial[-50].otf"
+          as="font"
+          type="font/otf"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className={`${satoshi.variable} ${exposure.variable}`}>
         <script

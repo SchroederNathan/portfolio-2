@@ -40,7 +40,7 @@
   font-family: 'Exposure-50';
   src: url('/fonts/exposure/ExposureTrial[-50].otf') format('opentype');
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {

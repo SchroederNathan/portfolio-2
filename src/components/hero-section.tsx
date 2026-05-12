@@ -8,26 +8,17 @@ import {
   LinkedInIcon,
   XIcon,
 } from "@/components/ui/svg-icons";
-import VariableProximity from "@/components/ui/variable-proximity";
-import { useRef } from "react";
 
 export default function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
   return (
-    <div ref={containerRef}>
+    <div>
       <Reveal delay={0}>
         <div className="flex flex-row justify-between gap-3 mb-3">
-          <h1 className="text-4xl font-exposure">
-            <VariableProximity
-              label="hey, I'm Nate"
-              fromFontVariationSettings="'wght' 1000, 'opsz' -30"
-              toFontVariationSettings="'wght' 1000, 'opsz' -100"
-              containerRef={containerRef}
-              radius={100}
-              falloff="gaussian"
-              className="font-black"
-            />
+          <h1
+            className="text-4xl font-black"
+            style={{ fontFamily: "Exposure-50" }}
+          >
+            hey, I<span className="font-sans">&apos;</span>m Nate
           </h1>
           <ThemeToggle />
         </div>
