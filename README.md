@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# portfolio-v2
 
-## Getting Started
+Personal site for Nathan Schroeder — [nathanschroeder.dev](https://nathanschroeder.dev).
 
-First, run the development server:
+Next.js 16 (App Router) + React 19 + Tailwind v4, with a Spotify-driven music card, MDX project pages, and a WebGL light-rays background.
+
+## Stack
+
+- **Next.js 16** with the App Router and React Compiler enabled
+- **React 19** + TypeScript (strict)
+- **Tailwind v4** via `@tailwindcss/postcss`, theme tokens declared in `globals.css` with `@theme inline`
+- **motion** for reveal/transition animations
+- **next-themes** for dark/light mode
+- **next-mdx-remote** for project detail pages
+- **ogl** for the WebGL light-rays background shader
+- **bun** as the package manager
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+bun install
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command         | What it does                              |
+| --------------- | ----------------------------------------- |
+| `bun dev`       | Start the Next.js dev server              |
+| `bun run build` | Production build                          |
+| `bun start`     | Run the production build                  |
+| `bun run lint`  | ESLint (`eslint-config-next`, TS + CWV)   |
 
-## Learn More
+## Project layout
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+  app/                  Routes, layout, global CSS, sitemap, robots, OG, API routes
+  components/           UI components, grouped by section (projects/, showcase/, etc.)
+  content/projects/     MDX bodies for project detail pages (slug must match data/projects.ts)
+  data/                 Source of truth for projects, showcase items, playground items
+  hooks/                Shared client hooks
+  lib/                  Small utilities (cn, etc.)
+public/
+  fonts/                Satoshi + 42 Exposure optical-size variants
+  images/, videos/      Project art and showcase clips
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Path alias: `@/*` → `./src/*`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Content
 
-## Deploy on Vercel
+- **Projects** — add an entry to `src/data/projects.ts` and a matching `src/content/projects/{slug}.mdx`. The detail route, sitemap, and listing pick it up automatically.
+- **Showcase** — add an entry to `src/data/showcase.ts` and drop the video in `public/videos/`.
+- **Playground** — add an entry to `src/data/playground.ts` **and** register the React component in the `experimentComponents` map inside `src/components/playground/playground-page-content.tsx`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Music card
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The homepage music card calls `/api/spotify/top-track`, which:
+
+1. Refreshes a Spotify token from a stored refresh token.
+2. Fetches the user's top track (`short_term`, cached 1h).
+3. Looks the track up on iTunes for a playable 30s preview and high-res artwork (Spotify previews are unavailable for most tracks).
+
+To make it work locally, set these in `.env.local`:
+
+```
+SPOTIFY_CLIENT_ID=
+SPOTIFY_CLIENT_SECRET=
+SPOTIFY_REFRESH_TOKEN=
+# optional, defaults to the prod redirect:
+SPOTIFY_REDIRECT_URI=http://localhost:3000/api/spotify/callback
+```
+
+To mint a refresh token, hit Spotify's authorize endpoint with the `user-top-read` scope pointing at `/api/spotify/callback` — the route returns the `refresh_token` for you to save as `SPOTIFY_REFRESH_TOKEN`.
+
+## Fonts
+
+Satoshi is loaded via `next/font/local`. The Exposure variable font is declared as individual `@font-face` rules for each optical size in `src/app/exposure-fonts.css`. Use a specific size by setting:
+
+```tsx
+<h1 style={{ fontFamily: "Exposure-50" }}>...</h1>
+```
+
+Naming convention: negative grades use a hyphen (`Exposure-50`), positive grades don't (`Exposure50`).
+
+## Deploy
+
+Hosted on Vercel. Pushing to `main` deploys to production.
