@@ -89,7 +89,7 @@ const ProjectCard = ({
                 alt={project.title}
                 fill
                 sizes="(max-width: 640px) 100vw, 320px"
-                className={`object-cover transition-opacity duration-300 ${
+                className={`object-cover transition-opacity duration-200 ease-out ${
                   isHovered && project.video ? "opacity-0" : "opacity-100"
                 }`}
               />
@@ -102,7 +102,7 @@ const ProjectCard = ({
                   loop
                   muted
                   playsInline
-                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-200 ease-out ${
                     isHovered ? "opacity-100" : "opacity-0"
                   }`}
                 />

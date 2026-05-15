@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useTransform } from "motion/react";
+import { animate, motion, useMotionValue, useTransform } from "motion/react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { PauseIcon, PlayIcon, SpotifyIcon } from "./ui/svg-icons";
@@ -363,7 +363,7 @@ const MusicCard = ({ trackId, search, spotifyTopTrack }: MusicCardProps) => {
           <span className="text-sm leading-0 ">top played track this month</span>
         </div>
       )}
-      <div className="flex flex-row items-center gap-4 relative pb-1 transition-all ">
+      <div className="flex flex-row items-center gap-4 relative pb-1">
         {/* Album Art with Play Button Overlay */}
         <div className="relative">
           <div className="w-24 h-24 rounded-md overflow-hidden">
@@ -386,11 +386,11 @@ const MusicCard = ({ trackId, search, spotifyTopTrack }: MusicCardProps) => {
           </div>
           <div className="flex flex-row items-center gap-3">
             <motion.button
-              whileTap={{ scale: 0.9 }}
-              whileHover={{ scale: 1.05, cursor: "pointer" }}
-              transition={{ duration: 0.2, ease: "easeInOut" }}
+              whileTap={{ scale: 0.96 }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.16, ease: [0.23, 1, 0.32, 1] }}
               onClick={togglePlayback}
-              className="bg-foreground rounded-full p-2 w-8 h-8 flex items-center justify-center shrink-0 transition-colors duration-200"
+              className="bg-foreground rounded-full p-2 w-8 h-8 flex items-center justify-center shrink-0 cursor-pointer"
               aria-label={isPlaying ? "Pause" : "Play"}
             >
               {" "}
@@ -404,8 +404,12 @@ const MusicCard = ({ trackId, search, spotifyTopTrack }: MusicCardProps) => {
             {trackData.preview_url && (
               <motion.div
                 className="flex-1 flex flex-col gap-1 -mb-2"
-                onHoverStart={() => scale.set(1.2)}
-                onHoverEnd={() => scale.set(1)}
+                onHoverStart={() =>
+                  animate(scale, 1.2, { duration: 0.2, ease: "easeOut" })
+                }
+                onHoverEnd={() =>
+                  animate(scale, 1, { duration: 0.2, ease: "easeOut" })
+                }
                 style={{
                   scale: progressScale,
                 }}

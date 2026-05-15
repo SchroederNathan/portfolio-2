@@ -34,33 +34,33 @@ export default function HeroSection() {
             href="https://x.com/nater02"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:scale-105 active:scale-90 transition-transform duration-200"
+            className="hover:scale-105 active:scale-[0.96] transition-transform duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
           >
-            <XIcon className="text-muted hover:text-foreground transition-colors duration-300" />
+            <XIcon className="text-muted hover:text-foreground transition-colors duration-200" />
           </a>
           <a
             href="https://www.instagram.com/nathanschroederr/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:scale-105 active:scale-90 transition-transform duration-200"
+            className="hover:scale-105 active:scale-[0.96] transition-transform duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
           >
-            <InstagramIcon className="text-muted hover:text-foreground transition-colors duration-300" />
+            <InstagramIcon className="text-muted hover:text-foreground transition-colors duration-200" />
           </a>
           <a
             href="https://www.linkedin.com/in/nathan-schroeder-a40aa2210/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:scale-105 active:scale-90 transition-transform duration-200"
+            className="hover:scale-105 active:scale-[0.96] transition-transform duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
           >
-            <LinkedInIcon className="text-muted hover:text-foreground transition-colors duration-300" />
+            <LinkedInIcon className="text-muted hover:text-foreground transition-colors duration-200" />
           </a>
           <a
             href="https://github.com/SchroederNathan"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:scale-105 active:scale-90 transition-transform duration-200"
+            className="hover:scale-105 active:scale-[0.96] transition-transform duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
           >
-            <GitHubIcon className="text-muted hover:text-foreground transition-colors duration-300" />
+            <GitHubIcon className="text-muted hover:text-foreground transition-colors duration-200" />
           </a>
         </div>
       </Reveal>
