@@ -1,6 +1,7 @@
 "use client";
 
 import { ShowcaseItem } from "@/data/showcase";
+import { ArrowUpRightIcon, LinkIcon } from "@/components/ui/svg-icons";
 import { motion } from "motion/react";
 import { useEffect, useRef } from "react";
 
@@ -44,7 +45,12 @@ const ShowcaseCard = ({
 
   return (
     <motion.div
-      className="group relative flex w-[320px] shrink-0 flex-col cursor-default"
+      className={`group relative flex w-[320px] shrink-0 flex-col ${item.url ? "cursor-pointer" : "cursor-default"}`}
+      onClick={() => {
+        if (item.url) {
+          window.open(item.url, "_blank", "noopener,noreferrer");
+        }
+      }}
       data-showcase-slug={item.slug}
       onMouseEnter={() => {
         if (!isTouchDevice) {
@@ -71,7 +77,21 @@ const ShowcaseCard = ({
 
       <div className="relative z-10 flex flex-col pb-2 lg:pb-3">
         <div className="mb-4">
-          <p className="text-lg text-foreground mb-2">{item.title}</p>
+          <p className="text-lg text-foreground flex items-center mb-2">
+            {item.title}
+            {item.url && (
+              <motion.span
+                className="-mb-4 ms-2 text-muted group-hover:text-foreground transition-colors duration-200"
+                animate={{
+                  x: isHovered ? 4 : 0,
+                  y: isHovered ? -4 : 0,
+                }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                <ArrowUpRightIcon size={14} />
+              </motion.span>
+            )}
+          </p>
           <p className="text-muted text-sm mb-3">{item.description}</p>
 
           <div className="flex flex-wrap gap-2">
@@ -108,6 +128,24 @@ const ShowcaseCard = ({
             />
           </div>
         </div>
+
+        {/* URL bar */}
+        {item.url && (
+          <motion.div
+            className="flex items-center justify-between gap-2 pt-3"
+            animate={{
+              opacity: isHovered ? 1 : 0,
+              filter: isHovered ? "blur(0px)" : "blur(4px)",
+              y: isHovered ? 0 : -8,
+            }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+            <span className="text-xs text-muted truncate flex-1">
+              {item.url}
+            </span>
+            <LinkIcon size={14} className="text-muted shrink-0" />
+          </motion.div>
+        )}
       </div>
     </motion.div>
   );

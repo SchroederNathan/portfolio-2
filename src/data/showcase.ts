@@ -4,6 +4,7 @@ export interface ShowcaseItem {
   video: string;
   tags: string[];
   slug: string;
+  url?: string;
 }
 
 export const showcaseItems: ShowcaseItem[] = [
@@ -13,6 +14,7 @@ export const showcaseItems: ShowcaseItem[] = [
     video: "/videos/gallery-carousel.MP4",
     tags: ["Reanimated", "Expo Blur"],
     slug: "gallery-carousel",
+    url: "https://rnmotion.dev/animations/gallery-carousel",
   },
   {
     title: "Context Menu",
@@ -20,6 +22,7 @@ export const showcaseItems: ShowcaseItem[] = [
     video: "/videos/context-menu.MP4",
     tags: ["Reanimated", "Expo Blur", "Gesture Handler", "Skia"],
     slug: "context-menu",
+    url: "https://rnmotion.dev/animations/radial-menu",
   },
   {
     title: "Review Input Transition",
