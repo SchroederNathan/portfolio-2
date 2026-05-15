@@ -17,6 +17,14 @@ export const showcaseItems: ShowcaseItem[] = [
     url: "https://rnmotion.dev/animations/gallery-carousel",
   },
   {
+    title: "Linear Tab Bar",
+    description: "Animated tab bar inspired by Linear",
+    video: "/videos/linear-tab-bar.mp4",
+    tags: ["Reanimated", "Gesture Handler"],
+    slug: "linear-tab-bar",
+    url: "https://rnmotion.dev/animations/linear-tab-bar",
+  },
+  {
     title: "Context Menu",
     description: "Custom long press context menu with actions",
     video: "/videos/context-menu.MP4",
