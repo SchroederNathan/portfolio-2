@@ -33,9 +33,9 @@ export async function GET() {
   try {
     const accessToken = await getAccessToken();
 
-    // Get top tracks from short_term (last ~4 weeks); we use the 4th one
+    // Get top tracks from short_term (last ~4 weeks); we use the #1 track
     const topTracksRes = await fetch(
-      "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=4",
+      "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=1",
       {
         headers: { Authorization: `Bearer ${accessToken}` },
         next: { revalidate: 3600 }, // cache for 1 hour
@@ -48,11 +48,11 @@ export async function GET() {
 
     const topTracks = await topTracksRes.json();
 
-    if (!topTracks.items || topTracks.items.length < 4) {
-      throw new Error("No fourth top track found");
+    if (!topTracks.items || topTracks.items.length === 0) {
+      throw new Error("No top track found");
     }
 
-    const track = topTracks.items[3];
+    const track = topTracks.items[0];
     const trackName = track.name;
     const artistName = track.artists.map((a: { name: string }) => a.name).join(", ");
     const searchQuery = `${trackName} ${artistName}`;
