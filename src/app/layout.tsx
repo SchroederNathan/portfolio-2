@@ -41,16 +41,16 @@ const exposure = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://nathanschroeder.dev"),
   title: {
-    default: "Nathan Schroeder — Software Developer & UI/UX Designer",
+    default: "Nathan Schroeder — Software Engineer & UI/UX Designer",
     template: "%s — Nathan Schroeder",
   },
   description:
-    "Software developer and UI/UX designer specializing in React Native and Next.js. Building apps like Movati (130K+ users), FocusGrid, and ThemeGen.",
+    "Developer Success Engineer at Expo. Software engineer and UI/UX designer specializing in React Native. I build apps used by hundreds of thousands of people.",
   authors: [{ name: "Nathan Schroeder" }],
   openGraph: {
-    title: "Nathan Schroeder — Software Developer & UI/UX Designer",
+    title: "Nathan Schroeder — Software Engineer & UI/UX Designer",
     description:
-      "Software developer and UI/UX designer specializing in React Native and Next.js.",
+      "Developer Success Engineer at Expo. Software engineer and UI/UX designer specializing in React Native.",
     url: "https://nathanschroeder.dev",
     siteName: "Nathan Schroeder",
     type: "website",
@@ -60,15 +60,15 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Nathan Schroeder — Software Developer & UI/UX Designer",
+        alt: "Nathan Schroeder — Software Engineer & UI/UX Designer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nathan Schroeder — Software Developer & UI/UX Designer",
+    title: "Nathan Schroeder — Software Engineer & UI/UX Designer",
     description:
-      "Software developer and UI/UX designer specializing in React Native and Next.js.",
+      "Developer Success Engineer at Expo. Software engineer and UI/UX designer specializing in React Native.",
     creator: "@nater02",
     images: ["/og.png"],
   },
@@ -112,11 +112,17 @@ export default function RootLayout({
                 "@type": "Person",
                 name: "Nathan Schroeder",
                 url: "https://nathanschroeder.dev",
-                jobTitle: "Software Developer & UI/UX Designer",
+                jobTitle: "Developer Success Engineer",
+                worksFor: {
+                  "@type": "Organization",
+                  name: "Expo",
+                  url: "https://expo.dev",
+                },
                 description:
-                  "Software developer and UI/UX designer specializing in React Native and Next.js. Building apps like Movati (130K+ users), FocusGrid, and ThemeGen.",
+                  "Developer Success Engineer at Expo. Software engineer and UI/UX designer specializing in React Native. I build apps used by hundreds of thousands of people.",
                 knowsAbout: [
                   "React Native",
+                  "Expo",
                   "Next.js",
                   "UI/UX Design",
                   "TypeScript",
