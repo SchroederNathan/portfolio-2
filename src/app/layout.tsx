@@ -41,14 +41,14 @@ const exposure = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://nathanschroeder.dev"),
   title: {
-    default: "Nathan Schroeder — Software Developer & UI/UX Designer",
+    default: "Nathan Schroeder — Software Engineer & UI/UX Designer",
     template: "%s — Nathan Schroeder",
   },
   description:
     "Developer Success Engineer at Expo. Software engineer and UI/UX designer specializing in React Native. I build apps used by hundreds of thousands of people.",
   authors: [{ name: "Nathan Schroeder" }],
   openGraph: {
-    title: "Nathan Schroeder — Software Developer & UI/UX Designer",
+    title: "Nathan Schroeder — Software Engineer & UI/UX Designer",
     description:
       "Developer Success Engineer at Expo. Software engineer and UI/UX designer specializing in React Native.",
     url: "https://nathanschroeder.dev",
@@ -60,13 +60,13 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Nathan Schroeder — Software Developer & UI/UX Designer",
+        alt: "Nathan Schroeder — Software Engineer & UI/UX Designer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nathan Schroeder — Software Developer & UI/UX Designer",
+    title: "Nathan Schroeder — Software Engineer & UI/UX Designer",
     description:
       "Developer Success Engineer at Expo. Software engineer and UI/UX designer specializing in React Native.",
     creator: "@nater02",
