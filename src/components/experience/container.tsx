@@ -5,12 +5,36 @@ import { useState } from "react";
 
 const experiences: Experience[] = [
   {
+    role: "Developer Success Engineer",
+    company: "Expo",
+    startDate: new Date("2026-06-01"),
+    description: (
+      <>
+        I help developers get the most out of Expo and EAS, providing
+        enterprise-level support across the support inbox, partner Slack channels,
+        and community spaces like{" "}
+        <span
+          className="italic font-exposure text-foreground"
+          style={{ fontFamily: "Exposure-30" }}
+        >
+          Discord and Reddit
+        </span>
+        . I act as the voice of the app developer, distilling feedback into product
+        priorities, and contribute to the Expo SDK, CLI, and diagnostic tooling like
+        Expo Doctor. I also create documentation, blogs, and videos, and run
+        workshops to make building with React Native easier for everyone
+      </>
+    ),
+    url: "https://expo.dev/",
+  },
+  {
     role: "Software Developer",
     company: "Red Piston",
     startDate: new Date("2025-04-01"),
+    endDate: new Date("2026-06-01"),
     description: (
       <>
-        I spend most of my time designing, building, and maintaining mobile apps in React
+        I spent most of my time designing, building, and maintaining mobile apps in React
         Native, SwiftUI, and Java with products that reached over{" "}
         <span
           className="italic font-exposure text-foreground"
@@ -18,7 +42,7 @@ const experiences: Experience[] = [
         >
           130k monthly active users
         </span>
-        . I also work on several web applications using React and Laravel. Besides
+        . I also worked on several web applications using React and Laravel. Besides
         development, I helped shape parts of our DevOps workflow, setting up servers,
         managing CI/CD pipelines, and working with AWS
       </>
