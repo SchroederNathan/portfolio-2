@@ -45,12 +45,12 @@ export const metadata: Metadata = {
     template: "%s — Nathan Schroeder",
   },
   description:
-    "Developer Success Engineer at Expo. Software developer and UI/UX designer specializing in React Native and Next.js. Building apps like Movati (130K+ users), FocusGrid, and ThemeGen.",
+    "Developer Success Engineer at Expo. Software engineer and UI/UX designer specializing in React Native. I build apps used by hundreds of thousands of people.",
   authors: [{ name: "Nathan Schroeder" }],
   openGraph: {
     title: "Nathan Schroeder — Software Developer & UI/UX Designer",
     description:
-      "Developer Success Engineer at Expo. Software developer and UI/UX designer specializing in React Native and Next.js.",
+      "Developer Success Engineer at Expo. Software engineer and UI/UX designer specializing in React Native.",
     url: "https://nathanschroeder.dev",
     siteName: "Nathan Schroeder",
     type: "website",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Nathan Schroeder — Software Developer & UI/UX Designer",
     description:
-      "Developer Success Engineer at Expo. Software developer and UI/UX designer specializing in React Native and Next.js.",
+      "Developer Success Engineer at Expo. Software engineer and UI/UX designer specializing in React Native.",
     creator: "@nater02",
     images: ["/og.png"],
   },
@@ -119,7 +119,7 @@ export default function RootLayout({
                   url: "https://expo.dev",
                 },
                 description:
-                  "Developer Success Engineer at Expo. Software developer and UI/UX designer specializing in React Native and Next.js. Building apps like Movati (130K+ users), FocusGrid, and ThemeGen.",
+                  "Developer Success Engineer at Expo. Software engineer and UI/UX designer specializing in React Native. I build apps used by hundreds of thousands of people.",
                 knowsAbout: [
                   "React Native",
                   "Expo",
