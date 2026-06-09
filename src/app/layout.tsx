@@ -45,12 +45,12 @@ export const metadata: Metadata = {
     template: "%s — Nathan Schroeder",
   },
   description:
-    "Software developer and UI/UX designer specializing in React Native and Next.js. Building apps like Movati (130K+ users), FocusGrid, and ThemeGen.",
+    "Developer Success Engineer at Expo. Software developer and UI/UX designer specializing in React Native and Next.js. Building apps like Movati (130K+ users), FocusGrid, and ThemeGen.",
   authors: [{ name: "Nathan Schroeder" }],
   openGraph: {
     title: "Nathan Schroeder — Software Developer & UI/UX Designer",
     description:
-      "Software developer and UI/UX designer specializing in React Native and Next.js.",
+      "Developer Success Engineer at Expo. Software developer and UI/UX designer specializing in React Native and Next.js.",
     url: "https://nathanschroeder.dev",
     siteName: "Nathan Schroeder",
     type: "website",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Nathan Schroeder — Software Developer & UI/UX Designer",
     description:
-      "Software developer and UI/UX designer specializing in React Native and Next.js.",
+      "Developer Success Engineer at Expo. Software developer and UI/UX designer specializing in React Native and Next.js.",
     creator: "@nater02",
     images: ["/og.png"],
   },
@@ -112,11 +112,17 @@ export default function RootLayout({
                 "@type": "Person",
                 name: "Nathan Schroeder",
                 url: "https://nathanschroeder.dev",
-                jobTitle: "Software Developer & UI/UX Designer",
+                jobTitle: "Developer Success Engineer",
+                worksFor: {
+                  "@type": "Organization",
+                  name: "Expo",
+                  url: "https://expo.dev",
+                },
                 description:
-                  "Software developer and UI/UX designer specializing in React Native and Next.js. Building apps like Movati (130K+ users), FocusGrid, and ThemeGen.",
+                  "Developer Success Engineer at Expo. Software developer and UI/UX designer specializing in React Native and Next.js. Building apps like Movati (130K+ users), FocusGrid, and ThemeGen.",
                 knowsAbout: [
                   "React Native",
+                  "Expo",
                   "Next.js",
                   "UI/UX Design",
                   "TypeScript",

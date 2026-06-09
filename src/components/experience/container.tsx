@@ -11,18 +11,18 @@ const experiences: Experience[] = [
     description: (
       <>
         I help developers get the most out of Expo and EAS, providing
-        enterprise-level support across the support inbox, partner Slack channels,
-        and community spaces like{" "}
+        enterprise-level support and acting as the voice of the app developer to
+        improve the{" "}
         <span
           className="italic font-exposure text-foreground"
           style={{ fontFamily: "Exposure-30" }}
         >
-          Discord and Reddit
+          developer experience
         </span>
-        . I act as the voice of the app developer, distilling feedback into product
-        priorities, and contribute to the Expo SDK, CLI, and diagnostic tooling like
-        Expo Doctor. I also create documentation, blogs, and videos, and run
-        workshops to make building with React Native easier for everyone
+        . I contribute to the Expo SDK, CLI, and diagnostic tooling like Expo
+        Doctor, distill community feedback into product priorities, and create
+        documentation, blogs, and videos to make building with React Native easier
+        for everyone
       </>
     ),
     url: "https://expo.dev/",
