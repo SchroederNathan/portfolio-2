@@ -75,6 +75,17 @@ const ProjectCard = ({
                 ))}
               </div>
             )}
+
+            {project.metrics && project.metrics.length > 0 && (
+              <div className="mt-3 grid grid-cols-3 gap-2">
+                {project.metrics.slice(0, 3).map((metric) => (
+                  <div key={metric.label} className="rounded-lg border border-white/10 bg-foreground/5 px-2 py-2">
+                    <p className="text-[10px] uppercase tracking-[0.18em] text-muted/80">{metric.label}</p>
+                    <p className="mt-1 text-xs text-foreground">{metric.value}</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Media container - image/video at bottom */}
